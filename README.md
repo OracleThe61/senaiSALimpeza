@@ -5,7 +5,7 @@ Trabalho da S.A do segundo semestre
 - Nicolas Corrêa Gubert;
 - Vitor Carlos Souza da Rocha Pinto;
 - Eric Mara de Oliveira
-- Ulisses
-- 
+- Francisco Ulisses
+  
 # TEMA: Aplicativo de serviço de limpeza
 Sera um aplicativo para facilitar o encontro de pessoas que prestam serviço de limpeza.
