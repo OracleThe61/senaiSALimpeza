@@ -2,9 +2,9 @@
 Trabalho da Situação de Aprendizagem do segundo semestre do curso técnico de Desenvolvimento de Sistemas do SENAI.
 
 # MEMBROS DO PROJETO:
-- (Nicolas Corrêa Gubert)[(https://github.com/correagubert)];
-- (Vitor Carlos Souza da Rocha Pinto)[https://github.com/OracleThe61];
-- (Eric Mara de Oliveira)[https://github.com/Eric02222];
+- [Nicolas Corrêa Gubert](https://github.com/correagubert);
+- [Vitor Carlos Souza da Rocha Pinto](https://github.com/OracleThe61);
+- [Eric Mara de Oliveira](https://github.com/Eric02222);
 - Francisco Ulisses
   
 # TEMA: Aplicativo de serviço de limpeza
