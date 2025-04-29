@@ -5,7 +5,7 @@ Trabalho da Situação de Aprendizagem do segundo semestre do curso técnico de 
 - [Nicolas Corrêa Gubert](https://github.com/correagubert);
 - [Vitor Carlos Souza da Rocha Pinto](https://github.com/OracleThe61);
 - [Eric Mara de Oliveira](https://github.com/Eric02222);
-- Francisco Ulisses
+- [Francisco Ulisses](https://github.com/ulissessantos95);
   
 # TEMA: Aplicativo de serviço de limpeza
 Será um aplicativo para facilitar o encontro de pessoas que prestam serviço de limpeza, além de facilitar também a locação do serviço.
