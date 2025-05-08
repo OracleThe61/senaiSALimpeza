@@ -1,21 +1,12 @@
-# senaiSALimpeza
-Trabalho da Situação de Aprendizagem do segundo semestre do curso técnico de Desenvolvimento de Sistemas do SENAI.
+# React + Vite
 
-# MEMBROS DO PROJETO:
-- [Nicolas Corrêa Gubert](https://github.com/correagubert);
-- [Vitor Carlos Souza da Rocha Pinto](https://github.com/OracleThe61);
-- [Eric Mara de Oliveira](https://github.com/Eric02222);
-- [Francisco Ulisses](https://github.com/ulissessantos95);
-  
-# TEMA: Aplicativo de serviço de limpeza
-Será um aplicativo para facilitar o encontro de pessoas que prestam serviço de limpeza, além de facilitar também a locação do serviço.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-# Requisitos Necessarios:
--Capacidade de criar, atualizar, logar e deletar contas de prestadores de serviço e clientes.  
--Capacidade de postar seu sevriço com valores ajustáveis de acordo com o local e com o trabalho feito.  
+Currently, two official plugins are available:
 
-# Adições Futuras: 
--Capacidade de adicionar itens extras para o prestador de serviços fazer no trabalho.  
--Sistema de availiação ao prestador de serviço.  
--Filtrar prestadores de serviço próximo a sua região.  
--Capacidade de solicitação dos clientes para prestadores de serviços atenderem.  
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
+## Expanding the ESLint configuration
+
+If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.

@@ -1,0 +1,36 @@
+.container-cadastro{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 30px;
+    min-height: calc(100vh);
+    background-color: rgb(255, 255, 255);
+}
+
+
+.inputs-cadastro {
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.input-email, .input-senha, .input-coSenha {
+    background-color: rgba(240, 248, 255, 0);
+    border: none;
+    border-bottom: 2px solid #1EA896;
+    padding-left: 2%;
+    height: 35px;
+    width: 300px;
+}
+
+.butao-cadastro {
+    border: none;
+    border-radius: 5px;
+    background-color: #1EA896;
+    color: rgb(255, 255, 255);
+    height: 35px;
+    width: 200px;
+}
