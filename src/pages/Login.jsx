@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import './Login.css'
 
 function Login() {
+
     const [emailLogin, setEmailLogin] = useState('')
     const [senhaLogin, setSenhaLogin] = useState('')
     const [usuarioLogado, setUsuarioLogado] = useState([])
@@ -26,7 +27,7 @@ function Login() {
 
     //         setEmail('')
     //         setSenha('')
-            
+
     //     }
 
 
@@ -34,23 +35,29 @@ function Login() {
 
 
 
-  return (
-    <div className='container-cadastro'>
-        <div>
-            <h1>Cadastro</h1>
-        </div>
+    return (
+        <div className='container-login'>
+            <div>
+                <h1>Login</h1>
+            </div>
 
-        <div>
-            <input type="text" value={emailLogin} onChange={(event) => setEmailLogin(event.target.value)}/>
-            <input type="password" value={senhaLogin} onChange={(event) => setSenhaLogin(event.target.value)}/>
-        </div>
+            <div className='inputs-login'>
+                <label htmlFor="input-emailLo" className='label-emailLo'>Email</label>
+                <input type="text" className='input-emailLo' value={emailLogin} onChange={(event) => setEmailLogin(event.target.value)} />
 
-        <div>
-            <button onClick={login}>Cadastrar</button>
-        </div>
+                <label htmlFor="input-senhaLo" className='label-senhaLo'>Senha</label>
+                <input type="password" className='input-senhaLo' value={senhaLogin} onChange={(event) => setSenhaLogin(event.target.value)} />
 
-    </div>
-  )
+
+            </div>
+
+            
+            <div>
+                <button className='botao-login'>Cadastrar</button>
+            </div>
+
+        </div>
+    )
 }
 
 export default Login

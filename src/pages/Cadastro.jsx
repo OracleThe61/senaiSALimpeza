@@ -40,18 +40,20 @@ function Cadastro() {
 
         <div className='inputs-cadastro'>
 
-            <label htmlFor="input-email">Email</label>
+            <label htmlFor="input-email" className='label-emailCad'>Email</label>
             <input type="text" className='input-email'  value={email} onChange={(event) => setEmail(event.target.value)}/>
 
-            <label htmlFor="input-senha">Senha</label>
+            <label htmlFor="input-senha" className='label-senhaCad'>Senha</label>
             <input type="password" className='input-senha'  value={senha} onChange={(event) => setSenha(event.target.value)}/>
 
-            <label htmlFor="input-coSenha">Confirmar Senha</label>
-            <input type="password" className='input-coSenha'  value={vaSenha} onChange={(event) => setVaSenha(event.target.value)}/>
+            <label htmlFor="input-coSenha" className='label-coSenhaCad'>Confirmar Senha</label>
+            <input type="password"  className='input-coSenha'  value={vaSenha} onChange={(event) => setVaSenha(event.target.value)}/>
         </div>
 
+       
+
         <div>
-            <button onClick={cadastro} className='butao-cadastro'>Cadastrar</button>
+            <button onClick={cadastro} className='botao-cadastro'>Cadastrar</button>
         </div>
 
     </div>

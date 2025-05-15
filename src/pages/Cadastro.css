@@ -4,7 +4,8 @@
     justify-content: center;
     flex-direction: column;
     gap: 30px;
-    min-height: calc(100vh);
+    min-height: calc(100vh - 5vh);
+    min-width: calc(50vw);
     background-color: rgb(255, 255, 255);
 }
 
@@ -22,15 +23,39 @@
     border: none;
     border-bottom: 2px solid #1EA896;
     padding-left: 2%;
+    margin-bottom: 10px;
     height: 35px;
-    width: 300px;
+    width: 22vw;
+    font-size: 18px;
 }
 
-.butao-cadastro {
+.botao-cadastro {
     border: none;
-    border-radius: 5px;
+    border-radius: 3px;
     background-color: #1EA896;
     color: rgb(255, 255, 255);
     height: 35px;
     width: 200px;
+    font-weight: bold;
+    font-size: 25px;
+    height: 45px;
+    width: 220px;
+    transition: 0.4s;
+}
+
+.botao-cadastro:hover {
+    background-color: aliceblue;
+    color: black;
+    border: 1px solid #16dfc4;
+    transition: 0.4s;
+}
+
+input:focus {
+    outline: none;
+    border-bottom: 2px solid #16dfc4;
+    transition: 0.4s;
+}
+
+.label-emailCad, .label-senhaCad, .label-coSenhaCad {
+    font-size: 20px;
 }
