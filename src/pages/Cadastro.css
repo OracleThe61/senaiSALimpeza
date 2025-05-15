@@ -59,3 +59,14 @@ input:focus {
 .label-emailCad, .label-senhaCad, .label-coSenhaCad {
     font-size: 20px;
 }
+
+.inputs-tipo-conta{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+}
+
+.cliente, .prestador-servico {
+    margin-right: 8px;
+}
