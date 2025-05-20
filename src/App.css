@@ -22,7 +22,7 @@
     margin-right: 1%;
 }
 
-.botao-ir-cad, .botao-ir-log{
+.botao-ir-cad, .botao-ir-log, .botao-ir-perfil{
     border: none;
     border-radius: 3px;
     background-color: #ffffff;
@@ -33,7 +33,7 @@
     transition: 0.4s;
 }
 
-.botao-ir-cad:hover, .botao-ir-log:hover {
+.botao-ir-cad:hover, .botao-ir-log:hover, .botao-ir-perfil:hover {
     background-color: aliceblue;
     color: black;
     border: 1px solid #000000;

@@ -1,0 +1,26 @@
+.container-perfil{
+    display: flex;
+    align-items: left;
+    justify-content: left;
+    flex-direction: row;
+    background-color: #16DFC4;
+    width: 100%;
+    padding-left: 10vh;
+    color: white;
+}
+
+#nome{
+    font-weight: bolder;
+    font-size: 6vh;
+}
+
+h1{
+    font-weight: lighter;
+}
+
+.perfil-dados{
+    display: flex;
+    justify-content: space-evenly; 
+    flex-direction: column;
+    padding-left: 5vh;
+}
