@@ -2,6 +2,7 @@ import React, { useState, useEffect  } from 'react'
 import './Cadastro.css'
 
 function Cadastro() {
+    const [nome, setNome] = useState('')
     const [email, setEmail] = useState('')
     const [senha, setSenha] = useState('')
     const [vaSenha, setVaSenha] = useState('')
@@ -13,13 +14,18 @@ function Cadastro() {
     useEffect(() => console.log(usuarios), [usuarios])
 
     function cadastro() {
-        if (!email || !senha || !vaSenha) {
+        const usuarioEncontrado = usuarios.find(usuario => usuario.email === email);
+
+        if (!nome || !email || !senha || !vaSenha) {
             alert("Preencha todos os campos")
+        } else if (usuarioEncontrado) {
+            alert("Usuario Ja Cadastrado")
         } else if (senha != vaSenha) {
             alert("A Senhas não conferem")
         } else{
             const novoUsuario = {
                 id: Date.now(),
+                nome: nome,
                 email: email,
                 senha: senha,
                 tipo_conta: tipoConta
@@ -30,6 +36,7 @@ function Cadastro() {
             setEmail('')
             setSenha('')
             setVaSenha('')
+            setNome('')
         }
 
 
@@ -47,6 +54,9 @@ function Cadastro() {
             </div>
 
             <div className='inputs-cadastro'>
+
+            <label htmlFor="input-email" className='label-emailCad'>Nome</label>
+            <input type="text" className='input-email' value={nome} onChange={(event) => setNome(event.target.value)} />
 
                 <label htmlFor="input-email" className='label-emailCad'>Email</label>
                 <input type="text" className='input-email' value={email} onChange={(event) => setEmail(event.target.value)} />

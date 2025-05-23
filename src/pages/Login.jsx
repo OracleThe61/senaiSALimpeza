@@ -33,30 +33,39 @@ function Login() {
 
 
     function login() {
-        let emailCad = usuarioCadastrado.find(({email}) => email === emailLogin)
-        let senhaCad = usuarioCadastrado.find(({senha}) => senha === senhaLogin)
+        let emailCad = usuarioCadastrado.find(usuario => usuario .email === emailLogin)
         
         console.log(usuarioCadastrado)
+        console.log(usuarioLogado)
        
         if (!emailLogin || !senhaLogin ) {
             alert("Preencha todos os campos")
-        }else if(emailCad.includes(emailLogin) != true ) {
+            console.log("aaaa")
+        }else if(!emailCad) {
             alert("Email não existente")
-        }else if(senhaCad.includes(senhaLogin) != true ) {
-            alert("A Senhas não conferem")
-        }else if(emailCad.includes(emailLogin) == true && senhaCad.includes(senhaLogin) == true){
-            let usuarioLo = {
-                id: Date.now(),
-                emailLo: emailLogin,
-                senhaLo: senhaLogin
+            console.log("rwerem")
+        }else if(emailCad){
+            if(emailCad.senha == senhaLogin){
+                let usuarioLo = {
+                    id: Date.now(),
+                    emailLo: emailLogin,
+                    senhaLo: senhaLogin,
+                    logado: true
+                }
+    
+                setUsuarioLogado([usuarioLo])
+    
+                setEmailLogin('')
+                setSenhaLogin('')
+                
+                alert("Login efetuado ")
+            }else {
+                alert("A Senhas não conferem")
+                console.log("jjjjse")
+    
             }
 
-            setUsuarioLogado([usuarioLo, ...usuarioLogado])
 
-            setEmailLogin('')
-            setSenhaLogin('')
-            
-            alert("Login efetuado ")
         }
 
 
