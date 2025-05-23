@@ -31,6 +31,11 @@ function Login() {
 
     //CODIGO A FAZER CONTINUAR DEPOIS, SOMENTE PROFICIOANIS (ERIC ANAL FABETA).
 
+    const validarEmail = (email) => {
+        const regex = /^[a-zA-Z0-9._%+-]+@(gmail\.com|yahoo\.com|outlook\.com)$/;
+        return regex.test(email);
+      };    
+
 
     function login() {
         let emailCad = usuarioCadastrado.find(usuario => usuario .email === emailLogin)
@@ -38,8 +43,8 @@ function Login() {
         console.log(usuarioCadastrado)
         console.log(usuarioLogado)
        
-        if (!emailLogin || !senhaLogin ) {
-            alert("Preencha todos os campos")
+        if (!emailLogin || !senhaLogin || !validarEmail(email)) {
+            alert("preencha todos os campos corretamente.")
             console.log("aaaa")
         }else if(!emailCad) {
             alert("Email não existente")

@@ -1,4 +1,4 @@
-import React, { useState, useEffect  } from 'react'
+import React, { useState } from 'react'
 import './Cadastro.css'
 
 function Cadastro() {
@@ -9,15 +9,17 @@ function Cadastro() {
     const [tipoConta, setTipoConta] = useState('Cliente')
     const [usuarios, setUsuarios] = useState([])
 
-    useEffect(() => console.log(tipoConta), [tipoConta])
+    const validarEmail = (email) => {
+        const regex = /^[a-zA-Z0-9._%+-]+@(gmail\.com|yahoo\.com|outlook\.com)$/;
+        return regex.test(email);
+      };    
 
-    useEffect(() => console.log(usuarios), [usuarios])
 
     function cadastro() {
         const usuarioEncontrado = usuarios.find(usuario => usuario.email === email);
 
-        if (!nome || !email || !senha || !vaSenha) {
-            alert("Preencha todos os campos")
+        if (!nome || !email || !senha || !vaSenha || !validarEmail(email)) {
+            alert("preencha todos os campos corretamente.")
         } else if (usuarioEncontrado) {
             alert("Usuario Ja Cadastrado")
         } else if (senha != vaSenha) {
