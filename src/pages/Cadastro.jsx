@@ -1,25 +1,33 @@
-import React, { useState, useEffect  } from 'react'
+import React, { useState } from 'react'
 import './Cadastro.css'
 
 function Cadastro() {
+    const [nome, setNome] = useState('')
     const [email, setEmail] = useState('')
     const [senha, setSenha] = useState('')
     const [vaSenha, setVaSenha] = useState('')
     const [tipoConta, setTipoConta] = useState('Cliente')
     const [usuarios, setUsuarios] = useState([])
 
-    useEffect(() => console.log(tipoConta), [tipoConta])
+    const validarEmail = (email) => {
+        const regex = /^[a-zA-Z0-9._%+-]+@(gmail\.com|yahoo\.com|outlook\.com)$/;
+        return regex.test(email);
+      };    
 
-    useEffect(() => console.log(usuarios), [usuarios])
 
     function cadastro() {
-        if (!email || !senha || !vaSenha) {
-            alert("Preencha todos os campos")
+        const usuarioEncontrado = usuarios.find(usuario => usuario.email === email);
+
+        if (!nome || !email || !senha || !vaSenha || !validarEmail(email)) {
+            alert("preencha todos os campos corretamente.")
+        } else if (usuarioEncontrado) {
+            alert("Usuario Ja Cadastrado")
         } else if (senha != vaSenha) {
             alert("A Senhas não conferem")
         } else{
             const novoUsuario = {
                 id: Date.now(),
+                nome: nome,
                 email: email,
                 senha: senha,
                 tipo_conta: tipoConta
@@ -30,6 +38,7 @@ function Cadastro() {
             setEmail('')
             setSenha('')
             setVaSenha('')
+            setNome('')
         }
 
 
@@ -47,6 +56,9 @@ function Cadastro() {
             </div>
 
             <div className='inputs-cadastro'>
+
+            <label htmlFor="input-email" className='label-emailCad'>Nome</label>
+            <input type="text" className='input-email' value={nome} onChange={(event) => setNome(event.target.value)} />
 
                 <label htmlFor="input-email" className='label-emailCad'>Email</label>
                 <input type="text" className='input-email' value={email} onChange={(event) => setEmail(event.target.value)} />
