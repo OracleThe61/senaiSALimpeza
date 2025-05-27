@@ -1,26 +1,41 @@
 .container-perfil{
     display: flex;
-    align-items: left;
-    justify-content: left;
-    flex-direction: row;
-    background-color: #16DFC4;
-    width: 100%;
-    padding-left: 10vh;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
     color: white;
 }
 
 #nome{
     font-weight: bolder;
     font-size: 6vh;
+    text-align: end;
 }
 
 h1{
     font-weight: lighter;
 }
 
+.img_perfil{
+    width: 15vw;
+}
+
 .perfil-dados{
     display: flex;
+    
+    flex-direction: row;
+    background-color: #16DFC4;
+    min-width: 100vw;
     justify-content: space-evenly; 
     flex-direction: column;
     padding-left: 5vh;
+}
+
+#img-perfil {
+    width: 250px;
+}
+
+.detalhes_perfil {
+    color: black;
+    text-align: justify;
 }
