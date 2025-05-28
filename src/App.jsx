@@ -3,6 +3,8 @@ import './App.css'
 import Cadastro from './pages/Cadastro'
 import Login from './pages/Login'
 import Perfil from './pages/Perfil'
+import Botao_logout from './components/Botao_logout'
+
 
 function App() {
   const [pagina, setPagina] = useState(<Login />)
@@ -19,6 +21,7 @@ function App() {
           <button className='botao-ir-perfil' onClick={() => setPagina(<Perfil />)}>Perfil</button>
           <button className='botao-ir-cad' onClick={() => setPagina(<Cadastro />)}>Cadastro</button>
           <button className='botao-ir-log' onClick={() => setPagina(<Login />)}>Login</button>
+          <Botao_logout />
         </div>
       </nav>
 

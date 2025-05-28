@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import './Cadastro.css'
 
+import { ToastContainer, toast } from 'react-toastify';
+
 function Cadastro() {
     const [nome, setNome] = useState('')
     const [email, setEmail] = useState('')
@@ -9,22 +11,22 @@ function Cadastro() {
     const [tipoConta, setTipoConta] = useState('Cliente')
     const [usuarios, setUsuarios] = useState([])
 
+
     const validarEmail = (email) => {
         const regex = /^[a-zA-Z0-9._%+-]+@(gmail\.com|yahoo\.com|outlook\.com)$/;
         return regex.test(email);
-      };    
-
+    };
 
     function cadastro() {
         const usuarioEncontrado = usuarios.find(usuario => usuario.email === email);
 
         if (!nome || !email || !senha || !vaSenha || !validarEmail(email)) {
-            alert("preencha todos os campos corretamente.")
+            toast.error("Preencha todos os campos corretamente");
         } else if (usuarioEncontrado) {
-            alert("Usuario Ja Cadastrado")
+            toast.warning("Usuario Ja Cadastrado");
         } else if (senha != vaSenha) {
-            alert("A Senhas não conferem")
-        } else{
+            toast.error("A Senhas não conferem");
+        } else {
             const novoUsuario = {
                 id: Date.now(),
                 nome: nome,
@@ -33,6 +35,7 @@ function Cadastro() {
                 tipo_conta: tipoConta
             }
 
+            toast.success("Cadastro efetuado com sucesso");
             setUsuarios([novoUsuario, ...usuarios])
 
             setEmail('')
@@ -42,11 +45,7 @@ function Cadastro() {
         }
 
 
-
-
     }
-
-    // useEffect(() => {console.log(usuarios), [usuarios]})
 
 
     return (
@@ -57,8 +56,8 @@ function Cadastro() {
 
             <div className='inputs-cadastro'>
 
-            <label htmlFor="input-email" className='label-emailCad'>Nome</label>
-            <input type="text" className='input-email' value={nome} onChange={(event) => setNome(event.target.value)} />
+                <label htmlFor="input-email" className='label-emailCad'>Nome</label>
+                <input type="text" className='input-email' value={nome} onChange={(event) => setNome(event.target.value)} />
 
                 <label htmlFor="input-email" className='label-emailCad'>Email</label>
                 <input type="text" className='input-email' value={email} onChange={(event) => setEmail(event.target.value)} />
@@ -83,6 +82,7 @@ function Cadastro() {
                     <label htmlFor="cliente">Cliente</label>
                 </div>
 
+                <ToastContainer position="top-right" autoClose={3000} pauseOnHover={false}  pauseOnFocusLoss={false} draggable={true} />
 
             </div>
 

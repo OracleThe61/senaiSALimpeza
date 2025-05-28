@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import './Perfil.css'
-import DetalheUser from './DetalheUser'
+import DetalheUser from '../components/DetalheUser'
 
 
 

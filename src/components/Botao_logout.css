@@ -1,0 +1,20 @@
+.bnt_logout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 3px;
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    height: 35px;
+    width: 100px;
+    font-size: 15px;
+    transition: 0.4s;
+}
+
+.bnt_logout:hover {
+    background-color: aliceblue;
+    color: black;
+    border: 1px solid #000000;
+    transition: 0.4s;
+}
