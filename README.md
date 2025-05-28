@@ -20,3 +20,7 @@ Será um aplicativo para facilitar o encontro de pessoas que prestam serviço de
 -Sistema de availiação ao prestador de serviço.  
 -Filtrar prestadores de serviço próximo a sua região.  
 -Capacidade de solicitação dos clientes para prestadores de serviços atenderem.  
+
+# Comando para intalçoes de bibliotecas obrigatorias: 
+-npm install
+-npm i --save react-toastify
