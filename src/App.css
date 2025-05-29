@@ -44,3 +44,12 @@
     width: 30px;
     margin-left: 50%;
 }
+
+.titulo{
+    right: 0;
+    font-size: 6px;
+}
+
+.detalhes_perfil{
+    display: flex;
+}

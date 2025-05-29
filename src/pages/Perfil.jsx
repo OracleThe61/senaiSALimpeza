@@ -36,20 +36,27 @@ function Perfil() {
 
         </div>
 
-        <h1 id='nome'>Nome do Usuário</h1>
+        <div>
+            <h1 id='nome'>Nome do Usuário</h1>
         <h1>Profissão em Lugar</h1>
         <h1>De RS$ a R$</h1>
         <h1>Trabalha das XX:XX às YY:YY</h1>
         <h1>Contato: ABCDEFGHIJKL</h1>
+
+        </div>
+      
       </div>
 
-      <h1 className='titulo'>Deatlhes do Usuario</h1>
-
       <div className='detalhes_perfil'>
+
+        <div>
+
+      <h1 className='titulo'>Deatlhes do Usuario</h1>
 
         {usuarioLo.map((p) => (
           <DetalheUser key={p.id} nome={p.nome} email={p.email} contato={p.contato} estado={p.estado} cidade={p.cidade}/>
         ))}
+        </div>
 
       </div>
 

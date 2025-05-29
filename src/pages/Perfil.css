@@ -1,15 +1,14 @@
 .container-perfil{
     display: flex;
-    align-items: center;
+    /* align-items: center; */
     justify-content: center;
     flex-direction: column;
-    color: white;
+    color: rgb(248, 241, 241);
 }
 
 #nome{
     font-weight: bolder;
     font-size: 6vh;
-    text-align: end;
 }
 
 h1{
@@ -17,25 +16,34 @@ h1{
 }
 
 .img_perfil{
+    width: 100px;
+    height: auto;
+    margin-right: 10px;
     width: 15vw;
 }
 
+
 .perfil-dados{
-    display: flex;
-    
+    display: flex;  
     flex-direction: row;
     background-color: #16DFC4;
     min-width: 100vw;
     justify-content: space-evenly; 
-    flex-direction: column;
+    /* flex-direction: column; */
     padding-left: 5vh;
 }
 
 #img-perfil {
+    
     width: 250px;
 }
 
 .detalhes_perfil {
     color: black;
-    text-align: justify;
+}
+
+.titulo{
+    font-weight: bolder;
+    font-size: 4rem;
+    float: right;
 }
