@@ -1,7 +1,7 @@
 .container-perfil{
     display: flex;
     /* align-items: center; */
-    justify-content: center;
+    /* justify-content: center; */
     flex-direction: column;
     color: rgb(248, 241, 241);
 }
@@ -16,21 +16,21 @@ h1{
 }
 
 .img_perfil{
-    width: 100px;
-    height: auto;
-    margin-right: 10px;
-    width: 15vw;
+    /* width: 100px; */
+    /* height: auto; */
+    /* margin-right: 10px; */
+    /* width: 15vw; */
 }
 
 
 .perfil-dados{
     display: flex;  
-    flex-direction: row;
+    /* flex-direction: row; */
     background-color: #16DFC4;
     min-width: 100vw;
-    justify-content: space-evenly; 
+    /* justify-content: space-evenly;  */
     /* flex-direction: column; */
-    padding-left: 5vh;
+    /* padding-left: 5vh; */
 }
 
 #img-perfil {
@@ -39,11 +39,13 @@ h1{
 }
 
 .detalhes_perfil {
+    display: flex;
+    text-align: center;
+
     color: black;
 }
 
 .titulo{
     font-weight: bolder;
     font-size: 4rem;
-    float: right;
 }
