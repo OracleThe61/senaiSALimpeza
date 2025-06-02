@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import './Cadastro.css'
+import Navbar from "../components/Navbar"
+import { useNavigate } from 'react-router-dom';
 
 import { ToastContainer, toast } from 'react-toastify';
 
@@ -10,6 +12,7 @@ function Cadastro() {
     const [vaSenha, setVaSenha] = useState('')
     const [tipoConta, setTipoConta] = useState('Cliente')
     const [usuarios, setUsuarios] = useState([])
+    const navigate = useNavigate(); 
 
 
     const validarEmail = (email) => {
@@ -37,6 +40,7 @@ function Cadastro() {
 
             toast.success("Cadastro efetuado com sucesso");
             setUsuarios([novoUsuario, ...usuarios])
+            navigate('/')
 
             setEmail('')
             setSenha('')
@@ -50,6 +54,11 @@ function Cadastro() {
 
     return (
         <div className='container-cadastro'>
+            <div className='navbar_lo'>
+                <Navbar />
+            </div>
+
+
             <div>
                 <h1>Cadastro</h1>
             </div>
@@ -82,7 +91,7 @@ function Cadastro() {
                     <label htmlFor="cliente">Cliente</label>
                 </div>
 
-                <ToastContainer position="top-right" autoClose={3000} pauseOnHover={false}  pauseOnFocusLoss={false} draggable={true} />
+                <ToastContainer position="top-right" autoClose={3000} pauseOnHover={false} pauseOnFocusLoss={false} draggable={true} />
 
             </div>
 

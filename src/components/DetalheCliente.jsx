@@ -1,7 +1,7 @@
 import React from 'react'
 
 
-function DetalheUser(info) {
+function DetalheCliente(info) {
     return (
         <div className='container-produto'>
             <p>Nome: {info.nome}</p>
@@ -16,4 +16,4 @@ function DetalheUser(info) {
     )
 }
 
-export default DetalheUser
+export default DetalheCliente

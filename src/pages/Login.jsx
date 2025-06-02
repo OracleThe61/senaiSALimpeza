@@ -1,40 +1,24 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
+import { GlobalContext } from "../contexts/GlobalContext"
+import Navbar from "../components/Navbar"
+import { useNavigate } from 'react-router-dom';
 import './Login.css'
 
 function Login() {
+    const {usuarioLogado, setUsuarioLogado} = useContext(GlobalContext)
+    const {usuarioCadastrado, setUsuarioCadastrado} = useContext(GlobalContext)
     const [emailLogin, setEmailLogin] = useState('')
     const [senhaLogin, setSenhaLogin] = useState('')
-    // const [usuarioLogado, setUsuarioLogado] = useState([])
+    const navigate = useNavigate()
+    
 
-    const [usuarioCadastrado, setUsuarioCadastrado] = useState([{
-        id: 123,
-        nome: "Bianca",
-        email: "bia@gmail.com",
-        senha: 123
-    }, {
-        id: 123,
-        nome: "Carlos",
-        email: "carlos@gmail.com",
-        senha: 321
-    }, {
-        id: 123,
-        nome: "João",
-        email: "joao@gmail.com",
-        senha: 213
-    }, {
-        id: 123,
-        nome: "paulo",
-        email: "paulo@gmail.com",
-        senha: 312
-    },])
+    
 
     function login() {
-        const usuario = JSON.parse(localStorage.getItem("usuarioLogado"));
         let emailCad = usuarioCadastrado.find(usuario => usuario.email === emailLogin)
 
-        console.log(usuarioCadastrado)
-        console.log(usuario)
+        console.log(usuarioLogado)
 
         if (!emailLogin || !senhaLogin) {
             toast.error("Preencha todos os campos corretamente");
@@ -44,7 +28,7 @@ function Login() {
         } else if (senhaLogin != emailCad.senha) {
             toast.error("A Senhas não conferem");
 
-        } else if (usuario) {
+        } else if (usuarioLogado) {
             toast.warning("Você já está logado em uma conta");
 
         }
@@ -52,17 +36,20 @@ function Login() {
 
             let usuarioLo = {
                 id: Date.now(),
+                nome: emailCad.nome,
                 emailLo: emailLogin,
-                senhaLo: senhaLogin,
+                tipo_conta: emailCad.tipo_conta,
                 logado: true
             }
 
-
+            console.log(usuarioLogado)
             setEmailLogin('')
             setSenhaLogin('')
 
             toast.success("Login efetuado com sucesso");
-            localStorage.setItem("usuarioLogado", JSON.stringify(usuarioLo));
+            setUsuarioLogado(usuarioLo)
+            navigate('/Perfil')
+            navigator
         }
 
 
@@ -72,6 +59,8 @@ function Login() {
 
     return (
         <div className='container-login'>
+             <Navbar />
+
             <div>
                 <h1>Login</h1>
             </div>
@@ -88,7 +77,7 @@ function Login() {
 
 
             <div>
-                <button className='botao-login' onClick={login}>Cadastrar</button>
+                <button className='botao-login' onClick={login}>Logar</button>
             </div>
 
         </div>

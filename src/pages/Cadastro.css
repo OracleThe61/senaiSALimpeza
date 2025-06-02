@@ -70,3 +70,9 @@ input:focus {
 .cliente, .prestador-servico {
     margin-right: 8px;
 }
+
+.navbar_lo {
+    display: flex;
+    align-items: center;    
+    justify-content: start;
+}

@@ -1,7 +1,7 @@
 import React from 'react'
 
 
-function DetalheUser(info) {
+function DetalhePrestadorSv(info) {
     return (
         <div className='container-produto'>
             <p>Nome: {info.nome}</p>
@@ -9,6 +9,8 @@ function DetalheUser(info) {
             <p>Contato: {info.contato}</p>
             <p>Estado: {info.estado}</p>
             <p>Cidade: {info.cidade}</p>
+            <p>Carga Horaria: {info.CargaHoraria} </p>
+            <p>Valor do Serviço: {info.valorServico}</p>
             <p>Tipo Conta: {info.tipo_conta}</p>
             <p>{info.id}</p>
             
@@ -16,4 +18,4 @@ function DetalheUser(info) {
     )
 }
 
-export default DetalheUser
+export default DetalhePrestadorSv
