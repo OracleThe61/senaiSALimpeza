@@ -81,9 +81,9 @@ function Perfil() {
 
       <div className='detalhes_perfil'>
 
-        <div className='dados_user'>
+        <div>
 
-          <h1>Deatlhes do Usuario</h1>
+          <h1 id='dados_user'>Deatlhes do Usuario</h1>
 
           {pagina}
 

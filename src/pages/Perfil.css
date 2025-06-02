@@ -7,6 +7,7 @@
 }
 
 #nome{
+    margin: 8vh;
     font-weight: bolder;
     font-size: 6vh;
 }
@@ -24,6 +25,8 @@ h1{
 
 
 .perfil-dados{
+    height: 35rem;
+
     display: flex;  
     /* flex-direction: row; */
     background-color: #16DFC4;
@@ -33,16 +36,26 @@ h1{
     /* padding-left: 5vh; */
 }
 
-#img-perfil {
-    
-    width: 250px;
+#img-perfil { 
+    margin-top: 8vh;
+    width: 25vh;
+
 }
 
 .detalhes_perfil {
+    width: 40vh;
+    height: 15vh;
     display: flex;
     text-align: center;
 
     color: black;
+}
+
+#dados_user{
+    margin-top: 10vh;
+    width: 85vh;
+    font-size: 45px;
+
 }
 
 .titulo{
