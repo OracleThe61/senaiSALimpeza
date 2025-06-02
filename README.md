@@ -23,4 +23,7 @@ Será um aplicativo para facilitar o encontro de pessoas que prestam serviço de
 
 # Comando para intalçoes de bibliotecas obrigatorias: 
 -Node: npm install  
--React-Toastify: npm i --save react-toastify
+-React-Toastify: npm i --save react-toastify  
+-react-router-dom: npm install react-router-dom
+
+
