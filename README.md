@@ -25,5 +25,7 @@ Será um aplicativo para facilitar o encontro de pessoas que prestam serviço de
 -Node: npm install  
 -React-Toastify: npm i --save react-toastify  
 -react-router-dom: npm install react-router-dom
-
+-Express: npm install express --save  
+-Nodemon: npm install nodemon -D  
+-Mysql2: npm install mysql2  
 
