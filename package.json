@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "express": "^5.1.0",
+    "mysql2": "^3.14.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-router-dom": "^7.6.1",
@@ -24,6 +26,20 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.19",
     "globals": "^16.0.0",
+    "nodemon": "^3.1.10",
     "vite": "^6.3.5"
-  }
+  },
+  "description": "Trabalho da Situação de Aprendizagem do segundo semestre do curso técnico de Desenvolvimento de Sistemas do SENAI.",
+  "main": "eslint.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OracleThe61/senaiSALimpeza.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/OracleThe61/senaiSALimpeza/issues"
+  },
+  "homepage": "https://github.com/OracleThe61/senaiSALimpeza#readme"
 }
