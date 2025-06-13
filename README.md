@@ -21,7 +21,7 @@ Será um aplicativo para facilitar o encontro de pessoas que prestam serviço de
 -Filtrar prestadores de serviço próximo a sua região.  
 -Capacidade de solicitação dos clientes para prestadores de serviços atenderem.  
 
-# Comando para intalçoes de bibliotecas obrigatorias: 
+# Comando para intalações de bibliotecas obrigatorias: 
 -Node: npm install  
 -React-Toastify: npm i --save react-toastify  
 -Axios: npm install axios  
