@@ -11,7 +11,7 @@ function Cadastro() {
     const [email, setEmail] = useState('')
     const [senha, setSenha] = useState('')
     const [vaSenha, setVaSenha] = useState('')
-    const [tipoConta, setTipoConta] = useState('')
+    const [tipoConta, setTipoConta] = useState('Cliente')
     const [usuarios, setUsuarios] = useState([])
     const navigate = useNavigate();
 
@@ -38,25 +38,44 @@ function Cadastro() {
         return regex.test(email);
     };
 
-    const cadastroUsuario = async () => {
+    const cadastro = async () => {
         try {
+            const usuarioEncontrado = usuarios.find(usuario => usuario.email === email);
+
+            if (!nome || !email || !senha || !vaSenha || !validarEmail(email)) {
+                toast.error("Preencha todos os campos corretamente");
+            } else if (usuarioEncontrado) {
+                toast.warning("Usuario Ja Cadastrado");
+            } else if (senha != vaSenha) {
+                toast.error("A Senhas não conferem");
+            } else {
+                
+
                 const usuario = {
                     nome: nome,
                     email: email,
                     senha: senha,
                     tipo_conta: tipoConta
                 }
-
+                
                 const response = await axios.post('http://localhost:3000/usuarios', usuario);
                 if (response.status === 201) {
                     fetchUsuarios();
                     limparForm();
+                    toast.success("Cadastro efetuado com sucesso");
                 }
-            
-        } catch (error) {
+                
+                
+
+            }
+
+
+        }catch (error) {
             console.error('Erro ao adicionar usuarios:', error);
         }
-    };
+        
+    }
+
 
     function limparForm() {
         setEmail('')
@@ -65,30 +84,7 @@ function Cadastro() {
         setNome('')
     }
 
-    function cadastro() {
-        const usuarioEncontrado = usuarios.find(usuario => usuario.email === email);
-
-        if (!nome || !email || !senha || !vaSenha || !validarEmail(email)) {
-            toast.error("Preencha todos os campos corretamente");
-        } else if (usuarioEncontrado) {
-            toast.warning("Usuario Ja Cadastrado");
-        } else if (senha != vaSenha) {
-            toast.error("A Senhas não conferem");
-        } else {
-            
-            cadastroUsuario()
-
-            toast.success("Cadastro efetuado com sucesso");
-            navigate('/')
-
-            setEmail('')
-            setSenha('')
-            setVaSenha('')
-            setNome('')
-        }
-
-
-    }
+    
 
 
     return (
@@ -120,14 +116,14 @@ function Cadastro() {
 
 
             <div className='inputs-tipo-conta'>
-                <div className='input-tipo-prestadorSe'>
-                    <input type="radio" id='prestador-servico' className='prestador-servico' value='prestador-servico' onChange={(event) => setTipoConta(event.target.value)} name='escolha' checked={tipoConta === 'prestador-servico'} />
-                    <label htmlFor="prestador-servico">Prestador/a de Serviço</label>
+                <div className='input-tipo-cliente'>
+                    <input type="radio" id='cliente' className='cliente' name='escolha' value='Cliente' onChange={(event) => setTipoConta(event.target.value)} checked={tipoConta === 'Cliente'} />
+                    <label htmlFor="cliente">Cliente</label>
                 </div>
 
-                <div className='input-tipo-cliente'>
-                    <input type="radio" id='cliente' className='cliente' name='escolha' value='cliente' onChange={(event) => setTipoConta(event.target.value)} checked={tipoConta === 'cliente'} />
-                    <label htmlFor="cliente">Cliente</label>
+                <div className='input-tipo-prestadorSe'>
+                    <input type="radio" id='prestador-servico' className='prestador-servico' value='Prestador/a de Serviço' onChange={(event) => setTipoConta(event.target.value)} name='escolha' checked={tipoConta === 'Prestador/a de Serviço'} />
+                    <label htmlFor="prestador-servico">Prestador/a de Serviço</label>
                 </div>
 
                 <ToastContainer position="top-right" autoClose={3000} pauseOnHover={false} pauseOnFocusLoss={false} draggable={true} />

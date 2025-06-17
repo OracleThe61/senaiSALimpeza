@@ -4,11 +4,11 @@ const mysql = require('mysql2/promise');
 
 const app = express();
 const pool = mysql.createPool({
-    host: 'localhost',
-    user: 'root',      // Altere para o nome do seu user no MySQL
-    password: '861391',    // Altere para a senha correta
-    database: 'sa_limpeza',
-    port:3307,
+    host: 'switchyard.proxy.rlwy.net',
+    user: 'root',      
+    password: 'VhkebWdHaRgvpOFTvTFLYDOnVxymrUAw',    // Altere para a senha correta
+    database: 'railway',
+    port: 26537,
     waitForConnections: true,
     connectionLimit: 10,
     queueLimit: 0
@@ -43,6 +43,7 @@ app.get('/usuarios/:id', async (req, res) => {
 
 app.post('/usuarios', async (req, res) => {
     const { nome, email, senha, tipo_conta} = req.body;
+    console.log(req.body);
     try {
         const [result] = await pool.query(
             'INSERT INTO usuarios (nome, email, senha, tipo_conta) VALUES (?, ?, ?, ?)',
