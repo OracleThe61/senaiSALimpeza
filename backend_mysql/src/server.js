@@ -6,8 +6,9 @@ const app = express();
 const pool = mysql.createPool({
     host: 'localhost',
     user: 'root',      // Altere para o nome do seu user no MySQL
-    password: 'senai',    // Altere para a senha correta
+    password: '861391',    // Altere para a senha correta
     database: 'sa_limpeza',
+    port:3307,
     waitForConnections: true,
     connectionLimit: 10,
     queueLimit: 0
@@ -41,17 +42,17 @@ app.get('/usuarios/:id', async (req, res) => {
 });
 
 app.post('/usuarios', async (req, res) => {
-    const { nome, email, senha} = req.body;
+    const { nome, email, senha, tipo_conta} = req.body;
     try {
         const [result] = await pool.query(
-            'INSERT INTO usuarios (nome, email, senha) VALUES (?, ?, ?)',
-            [nome, email, senha]
+            'INSERT INTO usuarios (nome, email, senha, tipo_conta) VALUES (?, ?, ?, ?)',
+            [nome, email, senha, tipo_conta]
         );
-        const [novoCliente] = await pool.query('SELECT * FROM usuarios WHERE id_usuario = ?', [result.insertId]);
-        res.status(201).json(novoCliente[0]);
+        const [novoUsuario] = await pool.query('SELECT * FROM usuarios WHERE id_usuario = ?', [result.insertId]);
+        res.status(201).json(novoUsuario[0]);
     } catch (err) {
         console.error(err.message);
-        res.status(500).json({ error: 'Erro ao adicionar cliente' });
+        res.status(500).json({ error: 'Erro ao adicionar Usuario' });
     }
 });
 
@@ -65,13 +66,13 @@ app.put('/usuarios/:id', async (req, res) => {
             [nome, email, senha, contato, tipo_conta, cep, estado, cidade, rua, valor_min, valor_max, cargaHoraria_inicio, cargaHoraria_fim, descricao, id]
         );
         if (result.affectedRows === 0) {
-            return res.status(404).json({ error: 'Cliente não encontrado' });
+            return res.status(404).json({ error: 'Usuario não encontrado' });
         }
-        const [clienteAtualizado] = await pool.query('SELECT * FROM usuarios WHERE id_usuario= ?', [id]);
-        res.json(clienteAtualizado[0]);
+        const [usuarioAtualizado] = await pool.query('SELECT * FROM usuarios WHERE id_usuario= ?', [id]);
+        res.json(usuarioAtualizado[0]);
     } catch (err) {
         console.error(err.message);
-        res.status(500).json({ error: 'Erro ao atualizar cliente' });
+        res.status(500).json({ error: 'Erro ao atualizar usuario' });
     }
 });
 
@@ -80,12 +81,12 @@ app.delete('/usuarios/:id', async (req, res) => {
     try {
         const [result] = await pool.query('DELETE FROM usuarios WHERE id_usuario = ?', [id]);
         if (result.affectedRows === 0) {
-            return res.status(404).json({ error: 'Cliente não encontrado' });
+            return res.status(404).json({ error: 'Usuario não encontrado' });
         }
-        res.json({ message: 'Cliente deletado com sucesso' });
+        res.json({ message: 'Usuario deletado com sucesso' });
     } catch (err) {
         console.error(err.message);
-        res.status(500).json({ error: 'Erro ao deletar cliente' });
+        res.status(500).json({ error: 'Erro ao deletar Usuario' });
     }
 });
 

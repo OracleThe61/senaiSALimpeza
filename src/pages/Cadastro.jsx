@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './Cadastro.css'
 import Navbar from "../components/Navbar"
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 import { ToastContainer, toast } from 'react-toastify';
@@ -10,9 +11,26 @@ function Cadastro() {
     const [email, setEmail] = useState('')
     const [senha, setSenha] = useState('')
     const [vaSenha, setVaSenha] = useState('')
-    const [tipoConta, setTipoConta] = useState('Cliente')
+    const [tipoConta, setTipoConta] = useState('')
     const [usuarios, setUsuarios] = useState([])
-    const navigate = useNavigate(); 
+    const navigate = useNavigate();
+
+    const fetchUsuarios = async () => {
+        try {
+            const response = await axios.get('http://localhost:3000/usuarios');
+            setUsuarios(response.data);
+        } catch (error) {
+            console.error('Erro ao buscar usuarios:', error);
+        }
+    };
+
+    useEffect(() => {
+        fetchUsuarios();
+    }, []);
+
+    useEffect(() => {
+        console.log(usuarios);
+    }, [usuarios]);
 
 
     const validarEmail = (email) => {
@@ -20,36 +38,75 @@ function Cadastro() {
         return regex.test(email);
     };
 
-    function cadastro() {
-        const usuarioEncontrado = usuarios.find(usuario => usuario.email === email);
+    const cadastro = async () => {
+        try {
+            const usuarioEncontrado = usuarios.find(usuario => usuario.email === email);
 
-        if (!nome || !email || !senha || !vaSenha || !validarEmail(email)) {
-            toast.error("Preencha todos os campos corretamente");
-        } else if (usuarioEncontrado) {
-            toast.warning("Usuario Ja Cadastrado");
-        } else if (senha != vaSenha) {
-            toast.error("A Senhas não conferem");
-        } else {
-            const novoUsuario = {
-                id: Date.now(),
-                nome: nome,
-                email: email,
-                senha: senha,
-                tipo_conta: tipoConta
+            if (!nome || !email || !senha || !vaSenha || !validarEmail(email)) {
+                return toast.error("Preencha todos os campos corretamente");
+
+            } else if (usuarioEncontrado) {
+                return toast.warning("Usuario Ja Cadastrado");
+            } else if (senha != vaSenha) {
+                return toast.error("A Senhas não conferem");
+            } else {
+                const usuario = {
+                    nome: nome,
+                    email: email,
+                    senha: senha,
+                    tipo_conta: tipoConta
+                }
+
+                const response = await axios.post('http://localhost:3000/usuarios', usuario);
+                if (response.status === 201) {
+                    fetchUsuarios();
+                    limparForm();
+                    toast.success("Cadastro efetuado com sucesso");
+                    navigate('/')
+                }
             }
-
-            toast.success("Cadastro efetuado com sucesso");
-            setUsuarios([novoUsuario, ...usuarios])
-            navigate('/')
-
-            setEmail('')
-            setSenha('')
-            setVaSenha('')
-            setNome('')
+        } catch (error) {
+            console.error('Erro ao adicionar usuarios:', error);
         }
+    };
 
-
+    function limparForm() {
+        setEmail('')
+        setSenha('')
+        setVaSenha('')
+        setNome('')
     }
+
+    // function cadastro() {
+    //     const usuarioEncontrado = usuarios.find(usuario => usuario.email === email);
+
+    //     if (!nome || !email || !senha || !vaSenha || !validarEmail(email)) {
+    //         toast.error("Preencha todos os campos corretamente");
+    //     } else if (usuarioEncontrado) {
+    //         toast.warning("Usuario Ja Cadastrado");
+    //     } else if (senha != vaSenha) {
+    //         toast.error("A Senhas não conferem");
+    //     } else {
+    //         const novoUsuario = {
+    //             id: Date.now(),
+    //             nome: nome,
+    //             email: email,
+    //             senha: senha,
+    //             tipo_conta: tipoConta
+    //         }
+
+    //         toast.success("Cadastro efetuado com sucesso");
+    //         setUsuarios([novoUsuario, ...usuarios])
+    //         navigate('/')
+
+    //         setEmail('')
+    //         setSenha('')
+    //         setVaSenha('')
+    //         setNome('')
+    //     }
+
+
+    // }
 
 
     return (
