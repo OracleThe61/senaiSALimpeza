@@ -38,18 +38,8 @@ function Cadastro() {
         return regex.test(email);
     };
 
-    const cadastro = async () => {
+    const cadastroUsuario = async () => {
         try {
-            const usuarioEncontrado = usuarios.find(usuario => usuario.email === email);
-
-            if (!nome || !email || !senha || !vaSenha || !validarEmail(email)) {
-                return toast.error("Preencha todos os campos corretamente");
-
-            } else if (usuarioEncontrado) {
-                return toast.warning("Usuario Ja Cadastrado");
-            } else if (senha != vaSenha) {
-                return toast.error("A Senhas não conferem");
-            } else {
                 const usuario = {
                     nome: nome,
                     email: email,
@@ -61,10 +51,8 @@ function Cadastro() {
                 if (response.status === 201) {
                     fetchUsuarios();
                     limparForm();
-                    toast.success("Cadastro efetuado com sucesso");
-                    navigate('/')
                 }
-            }
+            
         } catch (error) {
             console.error('Erro ao adicionar usuarios:', error);
         }
@@ -77,36 +65,30 @@ function Cadastro() {
         setNome('')
     }
 
-    // function cadastro() {
-    //     const usuarioEncontrado = usuarios.find(usuario => usuario.email === email);
+    function cadastro() {
+        const usuarioEncontrado = usuarios.find(usuario => usuario.email === email);
 
-    //     if (!nome || !email || !senha || !vaSenha || !validarEmail(email)) {
-    //         toast.error("Preencha todos os campos corretamente");
-    //     } else if (usuarioEncontrado) {
-    //         toast.warning("Usuario Ja Cadastrado");
-    //     } else if (senha != vaSenha) {
-    //         toast.error("A Senhas não conferem");
-    //     } else {
-    //         const novoUsuario = {
-    //             id: Date.now(),
-    //             nome: nome,
-    //             email: email,
-    //             senha: senha,
-    //             tipo_conta: tipoConta
-    //         }
+        if (!nome || !email || !senha || !vaSenha || !validarEmail(email)) {
+            toast.error("Preencha todos os campos corretamente");
+        } else if (usuarioEncontrado) {
+            toast.warning("Usuario Ja Cadastrado");
+        } else if (senha != vaSenha) {
+            toast.error("A Senhas não conferem");
+        } else {
+            
+            cadastroUsuario()
 
-    //         toast.success("Cadastro efetuado com sucesso");
-    //         setUsuarios([novoUsuario, ...usuarios])
-    //         navigate('/')
+            toast.success("Cadastro efetuado com sucesso");
+            navigate('/')
 
-    //         setEmail('')
-    //         setSenha('')
-    //         setVaSenha('')
-    //         setNome('')
-    //     }
+            setEmail('')
+            setSenha('')
+            setVaSenha('')
+            setNome('')
+        }
 
 
-    // }
+    }
 
 
     return (
