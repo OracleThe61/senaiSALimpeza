@@ -11,11 +11,14 @@
   },
   "dependencies": {
     "axios": "^1.10.0",
+    "cors": "^2.8.5",
     "express": "^5.1.0",
+    "install": "^0.13.0",
     "mysql2": "^3.14.1",
+    "npm": "^11.4.2",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "react-router-dom": "^7.6.1",
+    "react-router-dom": "^7.6.2",
     "react-toastify": "^11.0.5"
   },
   "devDependencies": {

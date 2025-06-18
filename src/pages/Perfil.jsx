@@ -5,6 +5,7 @@ import Navbar from "../components/Navbar"
 import DetalheCliente from '../components/DetalheCliente'
 import DetalhePrestadorSv from '../components/DetalhePrestadorSv'
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 
 
@@ -12,20 +13,39 @@ import { ToastContainer, toast } from 'react-toastify';
 function Perfil() {
   const [perfil, setPerfil] = useState('')
   const [pagina, setPagina] = useState('')
+  const [usuarios, setUsuarios] = useState([]);
   const { usuarioLogado, setUsuarioLogado } = useContext(GlobalContext)
   const navigate = useNavigate()
 
+  const fetchUsuarios = async () => {
+    try {
+      const response = await axios.get('http://localhost:3000/usuarios');
+      setUsuarios(response.data);
+    } catch (error) {
+      console.error('Erro ao buscar usuarios:', error);
+    }
+  };
+
   useEffect(() => {
-  if (!usuarioLogado) {
-    toast.warning("Você precisa estar logado.");
-    navigate("/");
-  } else {
-    tipoUsuario();
-  }
-}, [usuarioLogado]);
+    fetchUsuarios();
+  }, []);
+
+  useEffect(() => {
+    console.log(usuarios);
+  }, [usuarios]);
+
+  useEffect(() => {
+    if (!usuarioLogado) {
+      toast.warning("Você precisa estar logado.");
+      navigate("/");
+    } else {
+      tipoUsuario();
+    }
+  }, [usuarioLogado]);
 
   function tipoUsuario() {
-  
+
+
     if (usuarioLogado?.tipo_conta == "Prestador/a de Serviço") {
       setPagina(
         <DetalhePrestadorSv
@@ -33,12 +53,16 @@ function Perfil() {
           nome={usuarioLogado?.nome}
           email={usuarioLogado?.emailLo}
           contato={usuarioLogado?.contato}
+          cep={usuarioLogado?.cep}
           estado={usuarioLogado?.estado}
           cidade={usuarioLogado?.cidade}
-          cargaHoraria={usuarioLogado?.vargaHoraria}
-          valorServico={usuarioLogado?.valorServico}
+          rua={usuarioLogado?.rua}
+          CargaHorariaInicio={usuarioLogado?.cargaHoraria_max}
+          CargaHorariaFim={usuarioLogado?.cargaHoraria_min}
+          max={usuarioLogado?.valorServico_max}
+          valorServico_min={usuarioLogado?.valorServico_min}
           tipo_conta={usuarioLogado?.tipo_conta}
-
+          descricao={usuarioLogado?.descricao}
         />
       )
     } else if (usuarioLogado?.tipo_conta == "Cliente") {
@@ -51,6 +75,7 @@ function Perfil() {
           estado={usuarioLogado?.estado}
           cidade={usuarioLogado?.cidade}
           tipo_conta={usuarioLogado?.tipo_conta}
+          descricao={usuarioLogado?.descricao}
         />
 
       )
