@@ -50,7 +50,6 @@ function Cadastro() {
                 toast.error("A Senhas não conferem");
             } else {
                 
-
                 const usuario = {
                     nome: nome,
                     email: email,
@@ -64,18 +63,13 @@ function Cadastro() {
                     limparForm();
                     toast.success("Cadastro efetuado com sucesso");
                 }
-                
-                
 
             }
-
 
         }catch (error) {
             console.error('Erro ao adicionar usuarios:', error);
         }
-        
     }
-
 
     function limparForm() {
         setEmail('')
@@ -84,15 +78,11 @@ function Cadastro() {
         setNome('')
     }
 
-    
-
-
     return (
         <div className='container-cadastro'>
             <div className='navbar_lo'>
                 <Navbar />
             </div>
-
 
             <div>
                 <h1>Cadastro</h1>
@@ -113,7 +103,6 @@ function Cadastro() {
                 <input type="password" className='input-coSenha' value={vaSenha} onChange={(event) => setVaSenha(event.target.value)} />
 
             </div>
-
 
             <div className='inputs-tipo-conta'>
                 <div className='input-tipo-cliente'>

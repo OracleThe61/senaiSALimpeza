@@ -8,6 +8,7 @@ function Navbar() {
         <Link to="/">Login</Link>
         <Link to="/Cadastro">Cadastro</Link>
         <Link to="/Perfil">Perfil</Link>
+        <Link to="/Home">Home</Link>
         <Botao_logout />
     </nav>
   )

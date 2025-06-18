@@ -7,25 +7,12 @@ import Botao_logout from './components/Botao_logout'
 
 
 function App() {
-  const [pagina, setPagina] = useState(<Login />)
+  
   
 
   return (
     <div className='container-app'>
-      <nav className='cabecalho'>
-        <div className='container-home'>
-          <img src="/icons/icon-home.svg" onClick={() => setPagina(<Home />)} className='icone-home' />
-        </div>
-
-        <div className='container-botoes-app'>
-          <button className='botao-ir-perfil' onClick={() => setPagina(<Perfil />)}>Perfil</button>
-          <button className='botao-ir-cad' onClick={() => setPagina(<Cadastro />)}>Cadastro</button>
-          <button className='botao-ir-log' onClick={() => setPagina(<Login />)}>Login</button>
-          <Botao_logout />
-        </div>
-      </nav>
-
-      {pagina}
+ 
     </div>
   )
 }

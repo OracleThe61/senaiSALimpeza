@@ -25,7 +25,6 @@ function Login() {
     useEffect(() => {
         fetchUsuarios();
     }, []);
-    
 
     function login() {
         const usuarioEncontrado = usuarios.find(usuario => usuario.email === emailLogin)
@@ -62,10 +61,7 @@ function Login() {
             navigator
         }
 
-
     }
-
-
 
     return (
         <div className='container-login'>
@@ -84,7 +80,6 @@ function Login() {
 
                 <ToastContainer position="top-right" autoClose={3000} pauseOnHover={false} pauseOnFocusLoss={false} draggable={true} />
             </div>
-
 
             <div>
                 <button className='botao-login' onClick={login}>Logar</button>
