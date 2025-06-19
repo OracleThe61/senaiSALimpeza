@@ -49,14 +49,14 @@ function Cadastro() {
             } else if (senha != vaSenha) {
                 toast.error("A Senhas não conferem");
             } else {
-                
+
                 const usuario = {
                     nome: nome,
                     email: email,
                     senha: senha,
                     tipo_conta: tipoConta
                 }
-                
+
                 const response = await axios.post('http://localhost:3000/usuarios', usuario);
                 if (response.status === 201) {
                     fetchUsuarios();
@@ -66,7 +66,7 @@ function Cadastro() {
 
             }
 
-        }catch (error) {
+        } catch (error) {
             console.error('Erro ao adicionar usuarios:', error);
         }
     }
@@ -123,6 +123,17 @@ function Cadastro() {
                 <button onClick={cadastro} className='botao-cadastro'>Cadastrar</button>
             </div>
 
+            <ToastContainer
+                position="top-right" 
+                autoClose={5000} 
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
         </div>
     )
 }

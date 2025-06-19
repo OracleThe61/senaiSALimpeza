@@ -23,7 +23,7 @@ function Home() {
     }, []);
 
     const Card = ({ data, onClick, isSelected }) => {
-        if(data.tipo_conta === 'Prestador/a de Serviço') {  
+        if (data.tipo_conta === 'Prestador/a de Serviço') {
             return (<div className={`card ${isSelected ? 'selected' : ''}`} onClick={onClick}>
                 <h2>{data.nome}</h2>
                 <p>{data.email}</p>
@@ -31,7 +31,7 @@ function Home() {
                 <p>{data.tipo_conta}</p>
                 <p>{data.cargaHoraria_inicio} - {data.cargaHoraria_fim}</p>
                 <p>R$ {data.valor_min} - R$ {data.valor_max}</p>
-            </div>  )        
+            </div>)
         }
     }
 
@@ -88,7 +88,17 @@ function Home() {
                 )}
             </div>
 
-
+            <ToastContainer
+                position="top-right" 
+                autoClose={5000} 
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
 
         </div>
     );

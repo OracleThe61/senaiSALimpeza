@@ -29,6 +29,10 @@
     margin-bottom: 50px;
     padding: 0 5vw;
   }
+
+  .detalhes_conta{
+    color: #0d0d0d;
+  }
   
   #img-perfil {
     margin-top: 8vh;

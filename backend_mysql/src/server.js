@@ -59,12 +59,12 @@ app.post('/usuarios', async (req, res) => {
 
 app.put('/usuarios/:id', async (req, res) => {
     const { id } = req.params;
-    const { nome, email, senha, contato, tipo_conta, cep, estado, cidade, rua, valor_min, valor_max, cargaHoraria_inicio, cargaHoraria_fim, descricao } = req.body;
-    console.log(descricao)
+    const { nome, email, contato, tipo_conta, cep, estado, cidade, rua, valor_min, valor_max, cargaHoraria_inicio, cargaHoraria_fim, descricao } = req.body;
+    console.log(req.params)
     try {
         const [result] = await pool.query(
-            'UPDATE usuarios SET nome = ?, email = ?, senha = ?, contato = ?, tipo_conta = ?, cep = ?, estado = ?, cidade=?, rua = ?, valor_min = ?, valor_max = ?, cargaHoraria_inicio = ?, cargaHoraria_fim = ?, descricao = ? WHERE id_usuario = ?',
-            [nome, email, senha, contato, tipo_conta, cep, estado, cidade, rua, valor_min, valor_max, cargaHoraria_inicio, cargaHoraria_fim, descricao, id]
+            'UPDATE usuarios SET nome = ?, email = ?, contato = ?, tipo_conta = ?, cep = ?, estado = ?, cidade=?, rua = ?, valor_min = ?, valor_max = ?, cargaHoraria_inicio = ?, cargaHoraria_fim = ?, descricao = ? WHERE id_usuario = ?',
+            [nome, email, contato, tipo_conta, cep, estado, cidade, rua, valor_min, valor_max, cargaHoraria_inicio, cargaHoraria_fim, descricao, id]
         );
         if (result.affectedRows === 0) {
             return res.status(404).json({ error: 'Usuario não encontrado' });

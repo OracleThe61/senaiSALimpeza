@@ -7,12 +7,12 @@ import { useNavigate } from 'react-router-dom';
 import './Login.css'
 
 function Login() {
-    const {usuarioLogado, setUsuarioLogado} = useContext(GlobalContext)
+    const { usuarioLogado, setUsuarioLogado } = useContext(GlobalContext)
     const [usuarios, setUsuarios] = useState([])
     const [emailLogin, setEmailLogin] = useState('')
     const [senhaLogin, setSenhaLogin] = useState('')
     const navigate = useNavigate()
-    
+
     const fetchUsuarios = async () => {
         try {
             const response = await axios.get('http://localhost:3000/usuarios');
@@ -45,7 +45,7 @@ function Login() {
         else if (usuarioEncontrado) {
 
             let usuarioLo = {
-                id: Date.now(),
+                id: usuarioEncontrado.id_usuario,
                 nome: usuarioEncontrado.nome,
                 email: usuarioEncontrado.email,
                 tipo_conta: usuarioEncontrado.tipo_conta,
@@ -75,7 +75,7 @@ function Login() {
 
     return (
         <div className='container-login'>
-             <Navbar />
+            <Navbar />
 
             <div>
                 <h1>Login</h1>
@@ -95,6 +95,17 @@ function Login() {
                 <button className='botao-login' onClick={login}>Logar</button>
             </div>
 
+            <ToastContainer
+                position="top-right" 
+                autoClose={5000} 
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
         </div>
     )
 }
