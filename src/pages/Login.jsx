@@ -47,8 +47,18 @@ function Login() {
             let usuarioLo = {
                 id: Date.now(),
                 nome: usuarioEncontrado.nome,
-                emailLo: usuarioEncontrado.email,
+                email: usuarioEncontrado.email,
                 tipo_conta: usuarioEncontrado.tipo_conta,
+                contato: usuarioEncontrado.contato,
+                cep: usuarioEncontrado.cep,
+                estado: usuarioEncontrado.estado,
+                cidade: usuarioEncontrado.cidade,
+                rua: usuarioEncontrado.rua,
+                valor_min: usuarioEncontrado.valor_min,
+                valor_max: usuarioEncontrado.valor_max,
+                cargaHoraria_inicio: usuarioEncontrado.cargaHoraria_inicio,
+                cargaHoraria_fim: usuarioEncontrado.cargaHoraria_fim,
+                descricao: usuarioEncontrado.descricao
             }
 
             console.log(usuarioLogado)
