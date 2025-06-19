@@ -99,11 +99,10 @@ function Perfil() {
     try {
       await axios.delete(`http://localhost:3000/usuarios/${usuarioLogado.id}`);
 
-      toast.success('Conta excluída com sucesso!');
-
       setUsuarioLogado(null);
       setShowDeleteModal(false);
       navigate('/');
+      toast.success('Conta excluída com sucesso!');
     } catch (error) {
       toast.error('Erro ao excluir conta. Tente novamente.');
       console.error('Erro ao excluir conta:', error);
