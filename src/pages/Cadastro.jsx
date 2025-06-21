@@ -5,6 +5,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Cadastro() {
     const [nome, setNome] = useState('')
@@ -28,9 +29,6 @@ function Cadastro() {
         fetchUsuarios();
     }, []);
 
-    useEffect(() => {
-        console.log(usuarios);
-    }, [usuarios]);
 
 
     const validarEmail = (email) => {
@@ -56,12 +54,16 @@ function Cadastro() {
                     senha: senha,
                     tipo_conta: tipoConta
                 }
+                toast.success("Cadastro efetuado com sucesso");
 
                 const response = await axios.post('http://localhost:3000/usuarios', usuario);
                 if (response.status === 201) {
+
                     fetchUsuarios();
                     limparForm();
-                    toast.success("Cadastro efetuado com sucesso");
+                    setTimeout(() => {
+                        navigate('/Login');
+                    }, 800);
                 }
 
             }
@@ -115,7 +117,6 @@ function Cadastro() {
                     <label htmlFor="prestador-servico">Prestador/a de Serviço</label>
                 </div>
 
-                <ToastContainer position="top-right" autoClose={3000} pauseOnHover={false} pauseOnFocusLoss={false} draggable={true} />
 
             </div>
 
@@ -124,15 +125,16 @@ function Cadastro() {
             </div>
 
             <ToastContainer
-                position="top-right" 
-                autoClose={5000} 
+                position="top-right"
+                autoClose={2000}
                 hideProgressBar={false}
                 newestOnTop={false}
                 closeOnClick
                 rtl={false}
-                pauseOnFocusLoss
+                pauseOnFocusLoss={false}
                 draggable
-                pauseOnHover
+                pauseOnHover={false}
+                theme="colored"
             />
         </div>
     )

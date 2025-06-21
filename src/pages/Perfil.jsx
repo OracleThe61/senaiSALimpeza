@@ -99,10 +99,12 @@ function Perfil() {
     try {
       await axios.delete(`http://localhost:3000/usuarios/${usuarioLogado.id}`);
 
+      toast.success('Conta excluída com sucesso!');
       setUsuarioLogado(null);
       setShowDeleteModal(false);
-      navigate('/');
-      toast.success('Conta excluída com sucesso!');
+      setTimeout(() => {
+        navigate('/');
+      }, 1000);
     } catch (error) {
       toast.error('Erro ao excluir conta. Tente novamente.');
       console.error('Erro ao excluir conta:', error);
@@ -158,7 +160,7 @@ function Perfil() {
             name="tipo_conta"
             value={accountData.tipo_conta || ''}
             onChange={handleTypeChange}
-            disabled={!isEditing} 
+            disabled={!isEditing}
           >
             <option value="Cliente">Cliente</option>
             <option value="Prestador/a de Serviço">Prestador/a de Serviço</option>
@@ -368,18 +370,21 @@ function Perfil() {
             </div>
           </div>
         )}
-        <ToastContainer
-          position="top-right"
-          autoClose={5000} 
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-        />
+
       </div>
+
+      <ToastContainer
+        position="top-right"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss={false}
+        draggable
+        pauseOnHover={false}
+        theme="colored"
+      />
     </div>
   );
 }

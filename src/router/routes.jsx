@@ -7,10 +7,10 @@ import Home from "../pages/Home";
 
 
 const router = createBrowserRouter([
-    {path: "/", element: <Login />},
+    {path: "/Login", element: <Login />},
     {path: "/Cadastro", element: <Cadastro />},
     {path: "/Perfil", element: <Perfil />},
-    {path: "/Home", element: <Home />}
+    {path: "/", element: <Home />}
 ])
 
 export default router

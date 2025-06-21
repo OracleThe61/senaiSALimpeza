@@ -1,21 +1,20 @@
-.bnt_logout {
+.bnt_login {
     display: flex;
     align-items: center;
     justify-content: center;
     border: none;
     border-radius: 3px;
-    color: aliceblue;
-    background-color: #b41919;
-    color: rgb(255, 255, 255);
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
     height: 35px;
     width: 100px;
     font-size: 15px;
     transition: 0.4s;
 }
 
-.bnt_logout:hover {
-    background-color: rgb(255, 255, 255);
-    color: #b41919;
-    border: 1px solid #b41919;
+.bnt_login:hover {
+    background-color: aliceblue;
+    color: black;
+    border: 1px solid #000000;
     transition: 0.4s;
 }

@@ -61,14 +61,16 @@ function Login() {
                 descricao: usuarioEncontrado.descricao
             }
 
-            console.log(usuarioLogado)
+            toast.success("Login efetuado com sucesso");
+
             setEmailLogin('')
             setSenhaLogin('')
 
-            toast.success("Login efetuado com sucesso");
             setUsuarioLogado(usuarioLo)
-            navigate('/Perfil')
-            navigator
+
+            setTimeout(() => {
+                navigate('/Perfil');
+            }, 1000);
         }
 
     }
@@ -88,7 +90,6 @@ function Login() {
                 <label htmlFor="input-senhaLo" className='label-senhaLo'>Senha</label>
                 <input type="password" className='input-senhaLo' value={senhaLogin} onChange={(event) => setSenhaLogin(event.target.value)} />
 
-                <ToastContainer position="top-right" autoClose={3000} pauseOnHover={false} pauseOnFocusLoss={false} draggable={true} />
             </div>
 
             <div>
@@ -96,15 +97,16 @@ function Login() {
             </div>
 
             <ToastContainer
-                position="top-right" 
-                autoClose={5000} 
+                position="top-right"
+                autoClose={2000}
                 hideProgressBar={false}
                 newestOnTop={false}
                 closeOnClick
                 rtl={false}
-                pauseOnFocusLoss
+                pauseOnFocusLoss={false}
                 draggable
-                pauseOnHover
+                pauseOnHover={false}
+                theme="colored"
             />
         </div>
     )
