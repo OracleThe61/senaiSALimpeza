@@ -6,15 +6,15 @@
     border-radius: 3px;
     background-color: #ffffff;
     color: rgb(0, 0, 0);
-    height: 35px;
-    width: 100px;
+    height: 32px;
+    width: 80px;
     font-size: 15px;
+    font-weight: 900;
     transition: 0.4s;
 }
 
 .bnt_cadastro:hover {
     background-color: aliceblue;
-    color: black;
     border: 1px solid #000000;
     transition: 0.4s;
 }

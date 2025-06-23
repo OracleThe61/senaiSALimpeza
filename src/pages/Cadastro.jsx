@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import './Cadastro.css'
 import Navbar from "../components/Navbar"
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { Route, useNavigate } from 'react-router-dom';
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -82,47 +82,57 @@ function Cadastro() {
 
     return (
         <div className='container-cadastro'>
-            <div className='navbar_lo'>
+            
+                
                 <Navbar />
-            </div>
+                
+        
 
             <div>
-                <h1>Cadastro</h1>
+                <h1 className='titulo_cadastro'>Cadastro</h1>
             </div>
 
-            <div className='inputs-cadastro'>
+            <div className='container_conteudos_cadastro'>
+                <div className='inputs-cadastro'>
 
-                <label htmlFor="input-email" className='label-emailCad'>Nome</label>
-                <input type="text" className='input-email' value={nome} onChange={(event) => setNome(event.target.value)} />
+                    <label htmlFor="input-email" className='label-emailCad'>Nome</label>
+                    <input type="text" className='input-email' value={nome} onChange={(event) => setNome(event.target.value)} />
 
-                <label htmlFor="input-email" className='label-emailCad'>Email</label>
-                <input type="text" className='input-email' value={email} onChange={(event) => setEmail(event.target.value)} />
+                    <label htmlFor="input-email" className='label-emailCad'>Email</label>
+                    <input type="text" className='input-email' value={email} onChange={(event) => setEmail(event.target.value)} />
 
-                <label htmlFor="input-senha" className='label-senhaCad'>Senha</label>
-                <input type="password" className='input-senha' value={senha} onChange={(event) => setSenha(event.target.value)} />
+                    <label htmlFor="input-senha" className='label-senhaCad'>Senha</label>
+                    <input type="password" className='input-senha' value={senha} onChange={(event) => setSenha(event.target.value)} />
 
-                <label htmlFor="input-coSenha" className='label-coSenhaCad'>Confirmar Senha</label>
-                <input type="password" className='input-coSenha' value={vaSenha} onChange={(event) => setVaSenha(event.target.value)} />
+                    <label htmlFor="input-coSenha" className='label-coSenhaCad'>Confirmar Senha</label>
+                    <input type="password" className='input-coSenha' value={vaSenha} onChange={(event) => setVaSenha(event.target.value)} />
 
-            </div>
-
-            <div className='inputs-tipo-conta'>
-                <div className='input-tipo-cliente'>
-                    <input type="radio" id='cliente' className='cliente' name='escolha' value='Cliente' onChange={(event) => setTipoConta(event.target.value)} checked={tipoConta === 'Cliente'} />
-                    <label htmlFor="cliente">Cliente</label>
                 </div>
 
-                <div className='input-tipo-prestadorSe'>
-                    <input type="radio" id='prestador-servico' className='prestador-servico' value='Prestador/a de Serviço' onChange={(event) => setTipoConta(event.target.value)} name='escolha' checked={tipoConta === 'Prestador/a de Serviço'} />
-                    <label htmlFor="prestador-servico">Prestador/a de Serviço</label>
+                <div className='inputs-tipo-conta'>
+                    <div className='input-tipo-cliente'>
+                        <input type="radio" id='cliente' className='cliente' name='escolha' value='Cliente' onChange={(event) => setTipoConta(event.target.value)} checked={tipoConta === 'Cliente'} />
+                        <label htmlFor="cliente">Cliente</label>
+                    </div>
+
+                    <div className='input-tipo-prestadorSe'>
+                        <input type="radio" id='prestador-servico' className='prestador-servico' value='Prestador/a de Serviço' onChange={(event) => setTipoConta(event.target.value)} name='escolha' checked={tipoConta === 'Prestador/a de Serviço'} />
+                        <label htmlFor="prestador-servico">Prestador/a de Serviço</label>
+                    </div>
+
+
                 </div>
 
 
+                <div className='irPg_Login'>
+                    <label onClick={() => navigate('/Login')}>Já tem uma conta?</label>
+                </div>
+
+                <div className='container_bnt_cadastro'>
+                    <button onClick={cadastro} className='botao-cadastro'>Cadastrar</button>
+                </div>
             </div>
 
-            <div>
-                <button onClick={cadastro} className='botao-cadastro'>Cadastrar</button>
-            </div>
 
             <ToastContainer
                 position="top-right"

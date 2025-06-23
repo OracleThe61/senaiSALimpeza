@@ -77,24 +77,35 @@ function Login() {
 
     return (
         <div className='container-login'>
+            
             <Navbar />
 
             <div>
-                <h1>Login</h1>
+                <h1 className='titulo_login'>Login</h1>
             </div>
 
-            <div className='inputs-login'>
-                <label htmlFor="input-emailLo" className='label-emailLo'>Email</label>
-                <input type="text" className='input-emailLo' value={emailLogin} onChange={(event) => setEmailLogin(event.target.value)} />
+            <div className='container_conteudos_login'>
+                <div className='inputs-login'>
+                    <label htmlFor="input-emailLo" className='label-emailLo'>Email</label>
+                    <input type="text" className='input-emailLo' value={emailLogin} onChange={(event) => setEmailLogin(event.target.value)} />
 
-                <label htmlFor="input-senhaLo" className='label-senhaLo'>Senha</label>
-                <input type="password" className='input-senhaLo' value={senhaLogin} onChange={(event) => setSenhaLogin(event.target.value)} />
+                    <label htmlFor="input-senhaLo" className='label-senhaLo'>Senha</label>
+                    <input type="password" className='input-senhaLo' value={senhaLogin} onChange={(event) => setSenhaLogin(event.target.value)} />
+
+
+                </div>
+
+                <div className='irPg_cadastro'>
+                    <label onClick={() => navigate('/Cadastro')}>Não tem uma conta?</label>
+                </div>
+
+                <div className='container_bnt_login'>
+
+                    <button className='botao-login' onClick={login}>Logar</button>
+                </div>
 
             </div>
 
-            <div>
-                <button className='botao-login' onClick={login}>Logar</button>
-            </div>
 
             <ToastContainer
                 position="top-right"

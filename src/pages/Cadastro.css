@@ -1,16 +1,44 @@
-.container-cadastro{
+.container-cadastro {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    gap: 30px;
+    gap: 20px;
     min-height: calc(100vh - 5vh);
     min-width: calc(50vw);
     background-color: rgb(255, 255, 255);
 }
 
+.titulo_cadastro {
+    font-size: 40px;
+    font-weight: bolder;
+}
 
-.inputs-cadastro {
+.container_conteudos_cadastro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+}
+
+
+.irPg_Login {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.container_bnt_cadastro {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.inputs-cadastro label {
     display: flex;
     align-items: start;
     justify-content: center;
@@ -18,15 +46,23 @@
     gap: 10px;
 }
 
-.input-email, .input-senha, .input-coSenha {
+
+.input-email,
+.input-senha,
+.input-coSenha {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: rgba(240, 248, 255, 0);
     border: none;
-    border-bottom: 2px solid #1EA896;
+    border-bottom: 2px solid #242424;
     padding-left: 2%;
     margin-bottom: 10px;
+    min-width: 100%;
     height: 35px;
     width: 22vw;
     font-size: 18px;
+    transition: 0.4s;
 }
 
 .botao-cadastro {
@@ -56,23 +92,21 @@ input:focus {
     transition: 0.4s;
 }
 
-.label-emailCad, .label-senhaCad, .label-coSenhaCad {
+.label-emailCad,
+.label-senhaCad,
+.label-coSenhaCad {
     font-size: 20px;
 }
 
-.inputs-tipo-conta{
+.inputs-tipo-conta {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 50px;
 }
 
-.cliente, .prestador-servico {
+.cliente,
+.prestador-servico {
     margin-right: 8px;
 }
 
-.navbar_lo {
-    display: flex;
-    align-items: center;    
-    justify-content: start;
-}
