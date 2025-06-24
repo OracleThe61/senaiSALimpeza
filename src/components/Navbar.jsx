@@ -11,21 +11,35 @@ function Navbar() {
   const { usuarioLogado, setUsuarioLogado } = useContext(GlobalContext)
 
   return (
-    <nav className="navbar">
-      <Link to="/Perfil">Perfil</Link>
-      <Link to="/">Home</Link>
+    <div className="container_navbar">
+      <nav className="navbar">
+        <div>
+          <Link to="/">Home</Link>
+        </div>
 
-      {usuarioLogado ? (
-        <Botao_logout />
 
-      ) :
-        (
-          <>
-            <Botao_login />
-            <Botao_cadastro />
-          </>
-        )}
-    </nav>
+        <div className="opcoes_perfil">
+          {usuarioLogado ? (
+            <Botao_logout />
+
+          ) :
+            (
+              <>
+                <Botao_login />
+                <Botao_cadastro />
+              </>
+            )}
+
+          <div>
+            <Link to="/Perfil">Perfil</Link>
+          </div>
+
+        </div>
+
+
+      </nav>
+
+    </div>
   )
 }
 

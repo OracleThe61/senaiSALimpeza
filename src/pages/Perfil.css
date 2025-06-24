@@ -1,6 +1,5 @@
 .container-perfil {
     display: flex;
-    
     flex-direction: column;
     color: rgb(248, 241, 241);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;

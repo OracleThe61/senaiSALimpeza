@@ -1,11 +1,76 @@
-.navbar{
+.container_navbar {
     display: flex;
-    justify-content: center;
     align-items: center;
-    position: fixed;
+    justify-content: center;
+    position: fixed; 
     top: 0;
-    background-color: #16DFC4;
-    gap: 25px;
-    min-width: 100vw;
-    height: 6vh;
+    left: 0; 
+    width: 100%; 
+    background-color: #20c997; 
+    height: 60px; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white; 
+    width: 100%; 
+    max-width: 1850px; 
+    padding: 0 20px; 
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.1em;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.navbar a:hover {
+    color: #f0f0f0; 
+}
+
+.opcoes_perfil {
+    display: flex;
+    align-items: center;
+    gap: 20px; 
+}
+
+
+.opcoes_perfil .link-button { 
+    background-color: transparent;
+    border: 1px solid white;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 1em;
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.opcoes_perfil .link-button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+/* Adjust for smaller screens if necessary */
+@media (max-width: 600px) {
+    .navbar {
+        flex-direction: column;
+        justify-content: center;
+        gap: 10px;
+        padding: 10px 20px;
+    }
+    .container_navbar {
+        height: auto; /* Allow height to adjust */
+        padding: 10px 0;
+    }
+    .opcoes_perfil {
+        gap: 10px;
+    }
 }

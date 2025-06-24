@@ -28,10 +28,10 @@ function Home() {
         if (data.tipo_conta === 'Prestador/a de Serviço') {
             return (<div className={`card ${isSelected ? 'selected' : ''}`} onClick={onClick}>
                 <h2>{data.nome}</h2>
-                <p>{data.email}</p>
-                <p>{data.cidade} | {data.estado}</p>
-                <p>{data.cargaHoraria_inicio} - {data.cargaHoraria_fim}</p>
-                <p>R$ {data.valor_min} - R$ {data.valor_max}</p>
+                <p><strong>Email:</strong> {data.email}</p>
+                <p><strong>Localização:</strong> {data.cidade} | {data.estado}</p>
+                <p><strong>Horario:</strong> {data.cargaHoraria_inicio} - {data.cargaHoraria_fim}</p>
+                <p className="price-button"><strong>R$ {data.valor_min} - R$ {data.valor_max}</strong></p>
             </div>)
         }
     }
@@ -55,7 +55,7 @@ function Home() {
 
             <div className='corpo_home'>
                 <div className='input_pesquisa'>
-                    <input 
+                    <input
                         type="text"
                         placeholder="Buscar por nome, cidade, estado ou tipo..."
                         value={searchTerm}
@@ -77,8 +77,8 @@ function Home() {
                         ))}
                     </div>
 
-                    <div className='detalhe_usuarios'>
-                        {selectedCard && (
+                    {selectedCard && (
+                        <div className='detalhe_usuarios'>
                             <div className="card-details">
                                 <h2>{selectedCard.nome}</h2>
                                 <p><strong>Email:</strong> {selectedCard.email}</p>
@@ -89,9 +89,9 @@ function Home() {
                                 <p><strong>Faixa de Preço:</strong> R$ {selectedCard.valor_min} - R$ {selectedCard.valor_max}</p>
                                 <p><strong>Descrição:</strong> {selectedCard.descricao}</p>
                             </div>
-                        )}
 
-                    </div>
+                        </div>
+                    )}
 
                 </div>
 
