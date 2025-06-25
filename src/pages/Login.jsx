@@ -69,7 +69,7 @@ function Login() {
             setUsuarioLogado(usuarioLo)
 
             setTimeout(() => {
-                navigate('/Perfil');
+                navigate('/');
             }, 1000);
         }
 
