@@ -53,6 +53,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 }
 
 .container_bnt_login{
@@ -65,7 +66,7 @@
 .botao-login {
     border: none;
     border-radius: 3px;
-    background-color: #1EA896;
+    background-color: #20c997;
     color: rgb(255, 255, 255);
     font-weight: bold;
     font-size: 25px;
@@ -78,7 +79,7 @@
 .botao-login:hover {
     background-color: aliceblue;
     color: black;
-    border: 1px solid #16dfc4;
+    border: 1px solid #20c997;
     transition: 0.4s;
 }
 
