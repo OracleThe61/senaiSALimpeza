@@ -130,28 +130,34 @@ function Perfil() {
   };
 
 
+
   return (
     <div className="container-perfil">
       <Navbar />
-
       <div className="perfil-dados">
         <div className="img_perfil">
-          <img id="img-perfil" src="/icons/testavatar.png" alt="Avatar do Perfil" />
+          <img id="img-perfil" src="/icons/user-icon.svg" alt="Avatar do Perfil" />
+        
         </div>
 
-        <div>
-          <h1 id="nome">{accountData?.nome}</h1>
-          <h1>Email: {accountData?.email}</h1>
-          <h1>Contato: {accountData?.contato}</h1>
-          <h1>Estado: {accountData?.estado}</h1>
-          <h1>Cidade: {accountData?.cidade}</h1>
+        <div className='dados_usuario'>
+          <h2 className="nome">{accountData?.nome}</h2>
+          <p>Email: {accountData?.email}</p>
+          <p>Contato: {accountData?.contato}</p>
+          <p>Estado: {accountData?.estado}</p>
+          <p>Cidade: {accountData?.cidade}</p>
+          <p>Horario: {accountData?.cargaHoraria_inicio} - {accountData?.cargaHoraria_fim}</p>
+          <p>Faixa de Preço:: {accountData?.valor_min} - {accountData?.valor_max}</p>
         </div>
       </div>
 
 
+
       <div className="detalhes_conta">
 
-        <h2>Detalhes da Conta</h2>
+        <div className='titulo'>
+          <h1>Detalhes da Conta</h1>
+        </div>
 
         <div className="input-group">
           <label htmlFor="tipo_conta">Tipo de Conta:</label>
