@@ -1,0 +1,32 @@
+.cointainer_aviso {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(245, 255, 245);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border: 2px solid #d6da10;
+    border-radius: 8px;
+    height: 45px;
+    width: 550px;
+    padding: 0 15px;
+    gap: 15px;
+}
+
+.msg_aviso {
+    font-size: 18px;
+    font-weight: bolder;
+}
+
+.img-aviso {
+    width: 25px;
+}
+
+@media (max-width: 768px) {
+    .cointainer_aviso {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 55px;
+        width: 450px;
+    }
+}

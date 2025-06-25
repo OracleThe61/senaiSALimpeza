@@ -76,20 +76,20 @@ function Perfil() {
       ...prevData,
       contato: cleanedValue,
     }));
-    // Atualiza o estado de exibição para o input
+
     setDisplayContato(formattedValue);
   };
 
   const handleCepChange = (e) => {
     const rawValue = e.target.value;
-    const cleanedValue = rawValue.replace(/\D/g, ''); // Apenas números para o estado
-    const formattedValue = formatCepNumber(rawValue); // Formatado para exibição
+    const cleanedValue = rawValue.replace(/\D/g, ''); 
+    const formattedValue = formatCepNumber(rawValue); 
 
     setAccountData((prevData) => ({
       ...prevData,
-      cep: cleanedValue, // SALVA O VALOR LIMPO NO accountData
+      cep: cleanedValue, 
     }));
-    setDisplayCep(formattedValue); // ATUALIZA O VALOR DO INPUT PARA EXIBIÇÃO
+    setDisplayCep(formattedValue); 
   };
 
   const handleEditClick = () => {
@@ -99,7 +99,6 @@ function Perfil() {
 
   const handleCancelEdit = () => {
     setIsEditing(false);
-    // Restore `accountData` from `originalAccountData` on cancel.
     setAccountData(originalAccountData);
   };
 
@@ -156,7 +155,6 @@ function Perfil() {
     setAccountData((prevData) => ({
       ...prevData,
       tipo_conta: newType,
-      // Reset specific fields when changing type to 'cliente'
       cargaHoraria_inicio: newType === 'Cliente' ? null : prevData.cargaHoraria_inicio,
       cargaHoraria_fim: newType === 'Cliente' ? null : prevData.cargaHoraria_fim,
       valor_max: newType === 'Cliente' ? null : prevData.valor_max,
@@ -321,23 +319,23 @@ function Perfil() {
               />
             </div>
             <div className="input-group">
-              <label htmlFor="valor_max">Valor do Serviço Máximo:</label>
-              <input
-                type="number"
-                id="valor_max"
-                name="valor_max"
-                value={accountData.valor_max || ''}
-                onChange={handleInputChange}
-                readOnly={!isEditing}
-              />
-            </div>
-            <div className="input-group">
               <label htmlFor="valor_min">Valor do Serviço Mínimo:</label>
               <input
                 type="number"
                 id="valor_min"
                 name="valor_min"
                 value={accountData.valor_min || ''}
+                onChange={handleInputChange}
+                readOnly={!isEditing}
+              />
+            </div>
+            <div className="input-group">
+              <label htmlFor="valor_max">Valor do Serviço Máximo:</label>
+              <input
+                type="number"
+                id="valor_max"
+                name="valor_max"
+                value={accountData.valor_max || ''}
                 onChange={handleInputChange}
                 readOnly={!isEditing}
               />
@@ -427,7 +425,6 @@ function Perfil() {
         pauseOnFocusLoss={false}
         draggable
         pauseOnHover={false}
-        theme="colored"
       />
     </div>
   );

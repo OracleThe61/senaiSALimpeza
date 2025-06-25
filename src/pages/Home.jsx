@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import Navbar from "../components/Navbar"
 import './Home.css'
 import { ToastContainer, toast } from 'react-toastify';
 import { formatPhoneNumber, formatCepNumber, formatTime } from '../components/Formarter';
+import { GlobalContext } from '../contexts/GlobalContext';
+import Aviso from '../components/Aviso';
 
 
 function Home() {
@@ -11,9 +13,8 @@ function Home() {
     const [usuarios, setUsuarios] = useState([]);
     const [selectedCard, setSelectedCard] = useState(null);
     const [searchTerm, setSearchTerm] = useState('');
-    const [displayContato, setDisplayContato] = useState('');
-    const [displayCep, setDisplayCep] = useState('');
-
+    const { usuarioLogado, setUsuarioLogado } = useContext(GlobalContext);
+    const [mostrarAviso, setMostrarAviso] = useState(false)
 
     const fetchUsuarios = async () => {
         try {
@@ -26,19 +27,60 @@ function Home() {
 
     useEffect(() => {
         fetchUsuarios();
+
     }, []);
+
+    useEffect(() => {
+        if (usuarioLogado && usuarioLogado.tipo_conta === 'Prestador/a de Serviço') {
+            const { cargaHoraria_inicio, cargaHoraria_fim, valor_min, valor_max, cep, estado, cidade, rua, contato } = usuarioLogado;
+
+            const informacoesIncompletas =
+                !cargaHoraria_inicio ||
+                !cargaHoraria_fim ||
+                !valor_min ||
+                !valor_max ||
+                !cep ||
+                estado == 'Local Indefinido' ||
+                cidade == 'Local Indefinido' ||
+                rua == 'Local Indefinido' ||
+                !contato;
+
+            setMostrarAviso(informacoesIncompletas);
+        } else if (!usuarioLogado) {
+            setMostrarAviso(false);
+        }
+    }, [usuarioLogado]);
 
     const Card = ({ data, onClick, isSelected }) => {
         if (data.tipo_conta === 'Prestador/a de Serviço') {
-            return (<div className={`card ${isSelected ? 'selected' : ''}`} onClick={onClick}>
-                <h2>{data.nome}</h2>
-                <p><strong>Email:</strong> {data.email}</p>
-                <p><strong>Localização:</strong> {data.cidade} | {data.estado}</p>
-                <p><strong>Horario:</strong> {formatTime(data.cargaHoraria_inicio)} - {formatTime(data.cargaHoraria_fim)}</p>
-                <p className="price-button"><strong>R$ {data.valor_min} - R$ {data.valor_max}</strong></p>
-            </div>)
+            const informacoesCompletas =
+                data.cargaHoraria_inicio &&
+                data.cargaHoraria_fim &&
+                data.valor_min &&
+                data.valor_max &&
+                data.cep &&
+                data.estado != 'Local Indefinido' &&
+                data.cidade != 'Local Indefinido' &&
+                data.rua != 'Local Indefinido' &&
+                data.contato;
+
+            if (!informacoesCompletas && !(usuarioLogado && usuarioLogado.id === data.id)) {
+                return null;
+            }
+
+            return (
+                <div className={`card ${isSelected ? 'selected' : ''}`} onClick={onClick}>
+                    <h2>{data.nome}</h2>
+                    <p><strong>Email:</strong> {data.email}</p>
+                    <p><strong>Localização:</strong> {data.cidade} | {data.estado}</p>
+                    <p><strong>Horario:</strong> {formatTime(data.cargaHoraria_inicio)} - {formatTime(data.cargaHoraria_fim)}</p>
+                    <p className="price-button"><strong>R$ {data.valor_min} - R$ {data.valor_max}</strong></p>
+                </div>
+            );
         }
-    }
+        // Retorna null para outros tipos de conta que você não quer exibir
+        return null;
+    };
 
 
 
@@ -55,7 +97,13 @@ function Home() {
 
     return (
         <div className="container_home">
-            <Navbar />
+            <Navbar className='navbar' />
+
+            {usuarioLogado && mostrarAviso && (
+                <div className='aviso'>
+                    <Aviso />
+                </div>
+            )}
 
             <div className='corpo_home'>
                 <div className='input_pesquisa'>
@@ -109,9 +157,7 @@ function Home() {
                 newestOnTop={false}
                 closeOnClick
                 rtl={false}
-                pauseOnFocusLoss
                 draggable
-                pauseOnHover
             />
 
         </div>
