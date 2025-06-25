@@ -2,9 +2,11 @@ import React, { useContext, useEffect, useState } from 'react';
 import './Perfil.css';
 import { GlobalContext } from '../contexts/GlobalContext';
 import Navbar from '../components/Navbar';
+import { formatPhoneNumber, formatCepNumber } from '../components/Formarter';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
+import UserIcon from '../assets/icons/user-icon.svg';
 import 'react-toastify/dist/ReactToastify.css';
 
 function Perfil() {
@@ -16,6 +18,9 @@ function Perfil() {
   const navigate = useNavigate();
   const [accountData, setAccountData] = useState({});
   const [originalAccountData, setOriginalAccountData] = useState({});
+
+  const [displayContato, setDisplayContato] = useState('');
+  const [displayCep, setDisplayCep] = useState('');
 
 
   const fetchUsuarios = async () => {
@@ -32,11 +37,15 @@ function Perfil() {
   }, []);
 
 
+
   useEffect(() => {
     if (usuarioLogado) {
       setAccountData(usuarioLogado);
       setOriginalAccountData(usuarioLogado);
       console.log(accountData)
+      
+      setDisplayContato(formatPhoneNumber(usuarioLogado.contato || ''));
+      setDisplayCep(formatCepNumber(usuarioLogado.cep || ''));
     }
   }, [usuarioLogado]);
 
@@ -48,12 +57,39 @@ function Perfil() {
     }
   });
 
+
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setAccountData((prevData) => ({
       ...prevData,
       [name]: value,
     }));
+  };
+
+  const handleContactChange = (e) => {
+    const rawValue = e.target.value;
+    const cleanedValue = rawValue.replace(/\D/g, '');
+    const formattedValue = formatPhoneNumber(rawValue);
+
+    setAccountData((prevData) => ({
+      ...prevData,
+      contato: cleanedValue,
+    }));
+    // Atualiza o estado de exibição para o input
+    setDisplayContato(formattedValue);
+  };
+
+  const handleCepChange = (e) => {
+    const rawValue = e.target.value;
+    const cleanedValue = rawValue.replace(/\D/g, ''); // Apenas números para o estado
+    const formattedValue = formatCepNumber(rawValue); // Formatado para exibição
+
+    setAccountData((prevData) => ({
+      ...prevData,
+      cep: cleanedValue, // SALVA O VALOR LIMPO NO accountData
+    }));
+    setDisplayCep(formattedValue); // ATUALIZA O VALOR DO INPUT PARA EXIBIÇÃO
   };
 
   const handleEditClick = () => {
@@ -136,8 +172,8 @@ function Perfil() {
       <Navbar />
       <div className="perfil-dados">
         <div className="img_perfil">
-          <img id="img-perfil" src="/icons/user-icon.svg" alt="Avatar do Perfil" />
-        
+          <img id="img-perfil" src={UserIcon} alt="Avatar do Perfil" />
+
         </div>
 
         <div className='dados_usuario'>
@@ -147,7 +183,7 @@ function Perfil() {
           <p>Estado: {accountData?.estado}</p>
           <p>Cidade: {accountData?.cidade}</p>
           <p>Horario: {accountData?.cargaHoraria_inicio} - {accountData?.cargaHoraria_fim}</p>
-          <p>Faixa de Preço:: {accountData?.valor_min} - {accountData?.valor_max}</p>
+          <p>Faixa de Preço: {accountData?.valor_min} - {accountData?.valor_max}</p>
         </div>
       </div>
 
@@ -200,24 +236,26 @@ function Perfil() {
         <div className="input-group">
           <label htmlFor="contato">Contato:</label>
           <input
-            type="number"
+            type="text"
             id="contato"
             name="contato"
-            value={accountData.contato || ''}
-            onChange={handleInputChange}
+            value={displayContato || ''}
+            onChange={handleContactChange}
             readOnly={!isEditing}
+            maxLength="15"
           />
         </div>
 
         <div className="input-group">
           <label htmlFor="cep">CEP:</label>
           <input
-            type="number"
+            type="text"
             id="cep"
             name="cep"
-            value={accountData.cep || ''}
-            onChange={handleInputChange}
+            value={displayCep || ''}
+            onChange={handleCepChange}
             readOnly={!isEditing}
+            maxLength="9"
           />
         </div>
 

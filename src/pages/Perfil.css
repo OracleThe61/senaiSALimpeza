@@ -17,7 +17,7 @@
   min-width: 100vw;
   align-items: center;
   justify-content: start;
-  gap: 150px;
+  gap: 90px;
   padding: 2vh 0 0 9vw;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
@@ -27,17 +27,28 @@
 }
 
 .detalhes_conta {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  margin: 30px auto;
+  justify-content: center;
+  align-items: center;
+
   color: #0d0d0d;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
+  gap: 15px 80px;
+  width: fit-content;
+  width: 80vw;
+  margin: 30px auto;
   padding-top: 1vh;
+  background-color: #fefefe;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  color: #0d0d0d;
 }
 
-.titulo {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.detalhes_conta .titulo {
+  grid-column: 1 / -1;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 .detalhes_conta h1 {
@@ -47,28 +58,35 @@
 .input-group {
   display: flex;
   align-items: center;
-  padding: 0 0 0 5%;
-  
+  justify-content: flex-end;
+  padding-right: 15px;
 }
 
 .input-group label {
   font-size: 18px;
   font-weight: bold;
-  padding-right: 50px;
+  text-align: left;
+  margin-right: 10px;
+  flex-shrink: 0;
+  min-width: 250px;
 }
 
 .detalhes_conta input,
 select,
 textarea {
+  flex-grow: 1;
   background-color: rgba(240, 248, 255, 0.5);
+  box-sizing: border-box;
   outline: none;
   border: none;
+  background-color: #ececec;
   border-bottom: 2px solid #242424;
   padding-left: 1%;
   margin-bottom: 10px;
   min-width: 20%;
+  max-width: 400px;
   height: 35px;
-  width: 22vw;
+  width: auto;
   font-size: 18px;
   transition: 0.4s;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -82,14 +100,29 @@ textarea:focus {
   transition: 0.4s;
 }
 
+.detalhes_conta textarea {
+  min-height: 80px;
+  padding-top: 5px;
+}
+
+.detalhes_conta select {
+  appearance: none;
+  background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23333%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13%205.7L146.2%20202.7%2018.7%2075.1a17.6%2017.6%200%200%200-25.7%2023.1l137.9%20146.5a17.6%2017.6%200%200%200%2025.7%200l137.9-146.5c1.9-2%202.9-4.5%202.9-7.1%200-2.6-1-5.1-2.9-7.1z%22%2F%3E%3C%2Fsvg%3E');
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 12px;
+  padding-right: 30px;
+}
+
 
 #img-perfil {
-  margin-top: 8vh;
+  margin-top: 2vh;
   width: 25vh;
   height: 25vh;
   border-radius: 50%;
   object-fit: cover;
   border: 3px solid white;
+  background-color: #ffffff;
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
 
@@ -99,12 +132,13 @@ textarea:focus {
 }
 
 .button-group {
+  grid-column: 1 / -1;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 2vh 0 2vh 0;
   gap: 150px;
-  
+  flex-wrap: wrap;
 }
 
 .edit-button {
@@ -165,7 +199,7 @@ textarea:focus {
 }
 
 .cancel-button {
-  width: 160px;
+  width: 180px;
 }
 
 .modal-overlay {
@@ -186,10 +220,12 @@ textarea:focus {
   align-items: center;
   justify-content: center;
   background-color: #fefefe;
+  text-align: center;
   font-size: 25px;
   margin: 15% auto;
   padding: 20px;
   border: 1px solid #888;
+  min-width: 45vw;
   width: 25vw;
   height: 25vh;
   border: 1px solid #e2e8f0;
@@ -199,6 +235,115 @@ textarea:focus {
 
 .modal-actions {
   display: flex;
+  align-items: center;
+  align-items: center;
   padding-top: 10px;
   gap: 30px;
+}
+
+@media (max-width: 768px) {
+  .perfil-dados {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 2vh 0 0 0;
+    gap: 15px;
+  }
+
+  .perfil-dados p {
+    font-size: 19px;
+  }
+  
+  
+  .detalhes_conta {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    width: 90vw;
+    max-width: 90vw;
+    gap: 15px;
+  }
+
+  .input-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 15px;
+  }
+
+  .input-group label {
+    margin-bottom: 5px;
+    min-width: unset;
+  }
+
+  .detalhes_conta input,
+  select,
+  textarea {
+    width: 30vw;
+    max-width: unset;
+    min-width: unset;
+    height: 40px;
+    font-size: 16px;
+  }
+
+  .input-group {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 15px;
+    margin-bottom: 0;
+  }
+
+  .input-group label {
+    min-width: 250px;
+  }
+
+  .detalhes_conta input,
+  select,
+  textarea {
+    max-width: 400px;
+    height: 35px;
+    font-size: 18px;
+  }
+
+  .button-group {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .save-button,
+  .confirm-button,
+  .edit-button,
+  .delete-button,
+  .cancel-button {
+    width: 90%;
+    max-width: 250px;
+    height: 45px;
+    font-size: 18px;
+  }
+
+  .button-group {
+    flex-direction: row;
+    gap: 150px;
+  }
+
+  .save-button,
+  .confirm-button,
+  .edit-button,
+  .delete-button,
+  .cancel-button {
+    width: 130px;
+    height: 35px;
+    font-size: 20px;
+  }
+
+  .edit-button {
+    width: 80px;
+  }
+
+
+  .cancel-button {
+    width: 160px;
+  }
 }

@@ -3,6 +3,7 @@ import axios from 'axios';
 import Navbar from "../components/Navbar"
 import './Home.css'
 import { ToastContainer, toast } from 'react-toastify';
+import { formatPhoneNumber, formatCepNumber, formatTime } from '../components/Formarter';
 
 
 function Home() {
@@ -10,6 +11,9 @@ function Home() {
     const [usuarios, setUsuarios] = useState([]);
     const [selectedCard, setSelectedCard] = useState(null);
     const [searchTerm, setSearchTerm] = useState('');
+    const [displayContato, setDisplayContato] = useState('');
+    const [displayCep, setDisplayCep] = useState('');
+
 
     const fetchUsuarios = async () => {
         try {
@@ -30,7 +34,7 @@ function Home() {
                 <h2>{data.nome}</h2>
                 <p><strong>Email:</strong> {data.email}</p>
                 <p><strong>Localização:</strong> {data.cidade} | {data.estado}</p>
-                <p><strong>Horario:</strong> {data.cargaHoraria_inicio} - {data.cargaHoraria_fim}</p>
+                <p><strong>Horario:</strong> {formatTime(data.cargaHoraria_inicio)} - {formatTime(data.cargaHoraria_fim)}</p>
                 <p className="price-button"><strong>R$ {data.valor_min} - R$ {data.valor_max}</strong></p>
             </div>)
         }
@@ -82,10 +86,11 @@ function Home() {
                             <div className="card-details">
                                 <h2>{selectedCard.nome}</h2>
                                 <p><strong>Email:</strong> {selectedCard.email}</p>
-                                <p><strong>Contato:</strong> {selectedCard.contato}</p>
+                                <p><strong>Contato:</strong> {formatPhoneNumber(selectedCard.contato)}</p>
+                                <p><strong>CEP:</strong> {formatCepNumber(selectedCard.cep)}</p>
                                 <p><strong>Localização:</strong> {selectedCard.cidade}, {selectedCard.estado}</p>
                                 <p><strong>Rua:</strong> {selectedCard.rua}</p>
-                                <p><strong>Horário:</strong> {selectedCard.cargaHoraria_inicio} - {selectedCard.cargaHoraria_fim}</p>
+                                <p><strong>Horário:</strong>{formatTime(selectedCard.cargaHoraria_inicio)} - {formatTime(selectedCard.cargaHoraria_fim)}</p>
                                 <p><strong>Faixa de Preço:</strong> R$ {selectedCard.valor_min} - R$ {selectedCard.valor_max}</p>
                                 <p><strong>Descrição:</strong> {selectedCard.descricao}</p>
                             </div>

@@ -231,7 +231,7 @@ body {
     color: #333;
 }
 
-/* Responsive adjustments */
+
 @media (max-width: 768px) {
     .input_pesquisa {
         flex-direction: column;

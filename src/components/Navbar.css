@@ -8,6 +8,7 @@
     width: 100%; 
     background-color: #20c997; 
     height: 60px; 
+    z-index: 1;
 }
 
 .navbar {
@@ -56,16 +57,16 @@
     color: white;
 }
 
-/* Adjust for smaller screens if necessary */
+
 @media (max-width: 600px) {
     .navbar {
-        flex-direction: column;
+        flex-direction: row;
         justify-content: center;
-        gap: 10px;
+        gap: 200px;
         padding: 10px 20px;
     }
     .container_navbar {
-        height: auto; /* Allow height to adjust */
+        height: auto;
         padding: 10px 0;
     }
     .opcoes_perfil {
