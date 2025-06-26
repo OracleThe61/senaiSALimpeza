@@ -236,6 +236,10 @@
       display: flex;
       flex-direction: column;
       gap: 10px;
+
+      position: sticky;
+      top: 80px;
+      align-self: flex-start;
   }
 
   .card-details h2 {
