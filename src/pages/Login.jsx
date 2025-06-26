@@ -117,7 +117,7 @@ function Login() {
                 pauseOnFocusLoss={false}
                 draggable
                 pauseOnHover={false}
-                theme="colored"
+                
             />
         </div>
     )
