@@ -11,7 +11,7 @@
 }
 
 .perfil-dados {
-  height: 42vh;
+  height: 65vh;
   display: flex;
   background-color: #20c997;
   min-width: 100vw;
@@ -38,6 +38,7 @@
   width: fit-content;
   width: 80vw;
   margin: 30px auto;
+  padding-left: 1vw;
   padding-top: 1vh;
   background-color: #fefefe;
   border-radius: 8px;
@@ -227,7 +228,7 @@ textarea:focus {
   border: 1px solid #888;
   min-width: 45vw;
   width: 25vw;
-  height: 25vh;
+  height: 35vh;
   border: 1px solid #e2e8f0;
   border-radius: 1.5rem;
   gap: 10px;
