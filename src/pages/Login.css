@@ -3,7 +3,7 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    min-height: calc(100vh - 5vh);
+    min-height: calc(100vh - 1vh);
     min-width: calc(50vw);
     color: #000000;
     gap: 50px;
@@ -12,9 +12,9 @@
 
 .container_conteudos_login{
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
     gap: 30px;
 }
 
@@ -40,7 +40,6 @@
     border: none;
     border-bottom: 2px solid #242424;
     padding-left: 2%;
-    min-width: 100%;
     height: 35px;
     width: 22vw;
     font-size: 18px;

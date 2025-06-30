@@ -1,18 +1,9 @@
-  /* General Styling */
-  body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #f0f2f5;
-      /* Light grey background */
-  }
 
   .container_home {
       display: flex;
       flex-direction: column;
       min-height: 100vh;
   }
-
-
 
   .corpo_home {
       display: flex;
@@ -52,17 +43,14 @@
       border-radius: 5px;
       padding: 5px 10px;
       flex-grow: 1;
-      /* Allows them to expand */
   }
 
   .search-input-wrapper {
       flex-basis: 50%;
-      /* Takes up roughly half the space */
   }
 
   .location-input-wrapper {
       flex-basis: 30%;
-      /* Takes up less space */
   }
 
   .search-icon,
@@ -78,7 +66,6 @@
       padding: 5px;
       font-size: 1em;
       width: 100%;
-      /* Take full width of its wrapper */
   }
 
   .search-bar::placeholder {
@@ -87,7 +74,6 @@
 
   .search-button {
       background-color: #20c997;
-      /* Teal/Green */
       color: white;
       border: none;
       border-radius: 5px;
@@ -100,17 +86,14 @@
 
   .search-button:hover {
       background-color: #1a9c78;
-      /* Darker teal */
   }
 
   .filter-button {
       background-color: #20c997;
-      /* Teal/Green */
       color: white;
       border: none;
       border-radius: 5px;
       padding: 10px 12px;
-      /* Smaller padding for icon */
       cursor: pointer;
       font-size: 1.1em;
       transition: background-color 0.3s ease;
@@ -118,22 +101,15 @@
 
   .filter-button:hover {
       background-color: #1a9c78;
-      /* Darker teal */
   }
 
-
-  /* Main Content Layout (Cards and Details) */
   .main-content {
       display: flex;
       gap: 20px;
       width: 90%;
-      /* Adjust as needed */
       max-width: 1200px;
-      /* Max width for the entire content area */
       align-items: flex-start;
-      /* Align items to the top */
       flex-wrap: wrap;
-      /* Allow wrapping on smaller screens */
   }
 
   /* Card List */
@@ -206,11 +182,9 @@
 
   .card .price-button {
       background-color: #20c997;
-      /* Teal/Green */
       color: white;
       border: none;
       border-radius: 20px;
-      /* More rounded button */
       padding: 8px 15px;
       margin-top: 10px;
       font-size: 0.85em;
