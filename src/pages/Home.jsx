@@ -109,7 +109,7 @@ function Home() {
                 <div className='input_pesquisa'>
                     <input
                         type="text"
-                        placeholder="Buscar por nome, cidade, estado ou tipo..."
+                        placeholder="Buscar por nome, cidade ou estado"
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                         className="search-bar"
