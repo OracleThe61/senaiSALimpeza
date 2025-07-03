@@ -1,8 +1,8 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState, useCallback } from 'react';
 import './Perfil.css';
 import { GlobalContext } from '../contexts/GlobalContext';
 import Navbar from '../components/Navbar';
-import { formatPhoneNumber, formatCepNumber } from '../components/Formarter';
+import { formatPhoneNumber, formatCepNumber, validarEmail } from '../components/Formarter';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
@@ -13,7 +13,6 @@ function Perfil() {
   const [isEditing, setIsEditing] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showSaveModal, setShowSaveModal] = useState(false);
-  const [usuarios, setUsuarios] = useState([]);
   const { usuarioLogado, setUsuarioLogado } = useContext(GlobalContext);
   const navigate = useNavigate();
   const [accountData, setAccountData] = useState({});
@@ -23,27 +22,12 @@ function Perfil() {
   const [displayCep, setDisplayCep] = useState('');
 
 
-  const fetchUsuarios = async () => {
-    try {
-      const response = await axios.get('http://localhost:3000/usuarios');
-      setUsuarios(response.data);
-    } catch (error) {
-      console.error('Erro ao buscar usuarios:', error);
-    }
-  };
-
-  useEffect(() => {
-    fetchUsuarios();
-  }, []);
-
-
-
   useEffect(() => {
     if (usuarioLogado) {
       setAccountData(usuarioLogado);
       setOriginalAccountData(usuarioLogado);
       console.log(accountData)
-      
+
       setDisplayContato(formatPhoneNumber(usuarioLogado.contato || ''));
       setDisplayCep(formatCepNumber(usuarioLogado.cep || ''));
     }
@@ -57,7 +41,45 @@ function Perfil() {
     }
   });
 
+  const fetchAddressByCep = useCallback(async (cep) => {
 
+    const cleanedCep = cep.replace(/\D/g, '');
+
+    if (cleanedCep.length === 8) {
+      try {
+        const response = await axios.get(`https://viacep.com.br/ws/${cleanedCep}/json/`);
+        const data = response.data;
+
+        if (!data.erro) {
+          setAccountData((prevData) => ({
+            ...prevData,
+            estado: data.uf,
+            cidade: data.localidade,
+            rua: data.logradouro,
+
+          }));
+        } else {
+          toast.error('CEP não encontrado. Verifique o CEP digitado.');
+
+          setAccountData((prevData) => ({
+            ...prevData,
+            estado: '',
+            cidade: '',
+            rua: '',
+          }));
+        }
+      } catch (error) {
+        toast.error('Erro ao buscar CEP. Tente novamente.');
+        console.error('Erro ao buscar CEP:', error);
+        setAccountData((prevData) => ({
+          ...prevData,
+          estado: '',
+          cidade: '',
+          rua: '',
+        }));
+      }
+    }
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -82,14 +104,25 @@ function Perfil() {
 
   const handleCepChange = (e) => {
     const rawValue = e.target.value;
-    const cleanedValue = rawValue.replace(/\D/g, ''); 
-    const formattedValue = formatCepNumber(rawValue); 
+    const cleanedValue = rawValue.replace(/\D/g, '');
+    const formattedValue = formatCepNumber(rawValue);
 
     setAccountData((prevData) => ({
       ...prevData,
-      cep: cleanedValue, 
+      cep: cleanedValue,
     }));
-    setDisplayCep(formattedValue); 
+    setDisplayCep(formattedValue);
+
+    if (cleanedValue.length === 8) {
+      fetchAddressByCep(cleanedValue);
+    } else {
+      setAccountData((prevData) => ({
+        ...prevData,
+        estado: '',
+        cidade: '',
+        rua: '',
+      }));
+    }
   };
 
   const handleEditClick = () => {
@@ -108,14 +141,20 @@ function Perfil() {
 
   const confirmSave = async () => {
     try {
-      await axios.put(`http://localhost:3000/usuarios/${usuarioLogado.id}`, accountData);
 
-      setUsuarioLogado(accountData);
-      setIsEditing(false);
-      setShowSaveModal(false);
+      if (validarEmail(accountData.email)) {
+        await axios.put(`http://localhost:3000/usuarios/${usuarioLogado.id}`, accountData);
 
-      toast.success('Dados salvos com sucesso!');
-      setOriginalAccountData(accountData);
+        setUsuarioLogado(accountData);
+        setIsEditing(false);
+        setShowSaveModal(false);
+
+        toast.success('Dados salvos com sucesso!');
+        setOriginalAccountData(accountData);
+      } else {
+        toast.error('Preencha todos os campos corretamente')
+        setShowSaveModal(false);
+      }
     } catch (error) {
       toast.error('Erro ao salvar dados. Tente novamente.');
       console.error('Erro ao salvar dados:', error);

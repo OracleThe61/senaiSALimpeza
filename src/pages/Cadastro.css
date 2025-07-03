@@ -4,9 +4,9 @@
     justify-content: center;
     flex-direction: column;
     gap: 20px;
-    min-height: calc(100vh - 5vh);
-    min-width: calc(50vw);
+    min-height: calc(100vh);
     background-color: rgb(255, 255, 255);
+
 }
 
 .titulo_cadastro {
@@ -19,6 +19,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    min-width: 250px;
     gap: 30px;
 }
 
@@ -37,15 +38,27 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
 }
 
-.inputs-cadastro label {
+.inputs-cadastro {
     display: flex;
-    align-items: start;
+    align-items: center;
     justify-content: center;
     flex-direction: column;
+    width: 350px;
     gap: 10px;
 }
+
+
+.label-emailCad,
+.label-senhaCad,
+.label-coSenhaCad {
+    font-size: 20px;
+    align-self: self-start;
+    padding-left: 5%;
+}
+
 
 
 .input-email,
@@ -59,9 +72,8 @@
     border-bottom: 2px solid #242424;
     padding-left: 2%;
     margin-bottom: 10px;
-    min-width: 100%;
     height: 35px;
-    width: 22vw;
+    width: 100%;
     font-size: 18px;
     transition: 0.4s;
 }
@@ -92,12 +104,6 @@ input:focus {
     outline: none;
     border-bottom: 2px solid #20c997;
     transition: 0.4s;
-}
-
-.label-emailCad,
-.label-senhaCad,
-.label-coSenhaCad {
-    font-size: 20px;
 }
 
 .inputs-tipo-conta {

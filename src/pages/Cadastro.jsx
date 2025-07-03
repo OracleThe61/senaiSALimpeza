@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import './Cadastro.css'
 import Navbar from "../components/Navbar"
 import axios from 'axios';
+import { validarEmail } from '../components/Formarter';
 import { Route, useNavigate } from 'react-router-dom';
 
 import { ToastContainer, toast } from 'react-toastify';
@@ -29,12 +30,6 @@ function Cadastro() {
         fetchUsuarios();
     }, []);
 
-
-
-    const validarEmail = (email) => {
-        const regex = /^[a-zA-Z0-9._%+-]+@(gmail\.com|yahoo\.com|outlook\.com)$/;
-        return regex.test(email);
-    };
 
     const cadastro = async () => {
         try {
@@ -82,11 +77,7 @@ function Cadastro() {
 
     return (
         <div className='container-cadastro'>
-            
-                
-                <Navbar />
-                
-        
+            <Navbar />
 
             <div>
                 <h1 className='titulo_cadastro'>Cadastro</h1>

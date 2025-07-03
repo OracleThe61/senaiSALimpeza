@@ -77,22 +77,22 @@ function Login() {
 
     return (
         <div className='container-login'>
-            
+
             <Navbar />
+
 
             <div>
                 <h1 className='titulo_login'>Login</h1>
             </div>
 
             <div className='container_conteudos_login'>
+
                 <div className='inputs-login'>
                     <label htmlFor="input-emailLo" className='label-emailLo'>Email</label>
                     <input type="text" className='input-emailLo' value={emailLogin} onChange={(event) => setEmailLogin(event.target.value)} />
 
                     <label htmlFor="input-senhaLo" className='label-senhaLo'>Senha</label>
                     <input type="password" className='input-senhaLo' value={senhaLogin} onChange={(event) => setSenhaLogin(event.target.value)} />
-
-
                 </div>
 
                 <div className='irPg_cadastro'>
@@ -103,6 +103,7 @@ function Login() {
 
                     <button className='botao-login' onClick={login}>Logar</button>
                 </div>
+
 
             </div>
 
@@ -117,7 +118,7 @@ function Login() {
                 pauseOnFocusLoss={false}
                 draggable
                 pauseOnHover={false}
-                
+
             />
         </div>
     )

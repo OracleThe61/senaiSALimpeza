@@ -1,53 +1,65 @@
-.container-login{
+.container-login {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    min-height: calc(100vh - 1vh);
-    min-width: calc(50vw);
+    min-height: calc(100vh);
     color: #000000;
     gap: 50px;
-    background-color: rgb(255, 255, 255);      
+    background-color: rgb(255, 255, 255);
 }
 
-.container_conteudos_login{
+.container_conteudos_login {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    min-width: 250px;
     gap: 30px;
 }
 
-.titulo_login{
+
+.titulo_login {
+    text-align: center;
     font-size: 40px;
     font-weight: bolder;
 }
 
-.inputs-login{
+
+.label-emailLo,
+.label-senhaLo {
+    align-self: self-start;
+    padding-left: 5%;
+    font-size: 20px;
+}
+
+.inputs-login {
     display: flex;
-    align-items: start;
+    align-items: center;
     justify-content: center;
     flex-direction: column;
     gap: 4px;
+    width: 350px;
 }
 
-.input-emailLo{
+.input-emailLo {
     margin-bottom: 50px;
 }
 
-.input-emailLo, .input-senhaLo {
+.input-emailLo,
+.input-senhaLo {
     background-color: rgba(240, 248, 255, 0);
     border: none;
     border-bottom: 2px solid #242424;
     padding-left: 2%;
     height: 35px;
-    width: 22vw;
     font-size: 18px;
     color: #000000;
     transition: 0.4s;
+    width: 100%;
 }
 
-.irPg_cadastro{
+.irPg_cadastro {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -55,7 +67,7 @@
     cursor: pointer;
 }
 
-.container_bnt_login{
+.container_bnt_login {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -80,8 +92,4 @@
     color: black;
     border: 1px solid #20c997;
     transition: 0.4s;
-}
-
-.label-emailLo, .label-senhaLo {
-    font-size: 20px;
 }
