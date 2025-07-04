@@ -40,9 +40,12 @@ function Home() {
                 !valor_min ||
                 !valor_max ||
                 !cep ||
-                estado == 'Local Indefinido' ||
-                cidade == 'Local Indefinido' ||
-                rua == 'Local Indefinido' ||
+                estado == 'Local Indefinido' || 
+                estado == '' ||
+                cidade == 'Local Indefinido' || 
+                cidade =='' ||
+                rua == 'Local Indefinido' || 
+                rua == '' ||
                 !contato;
 
             setMostrarAviso(informacoesIncompletas);
@@ -60,8 +63,11 @@ function Home() {
                 data.valor_max &&
                 data.cep &&
                 data.estado != 'Local Indefinido' &&
+                data.estado != '' &&
                 data.cidade != 'Local Indefinido' &&
+                data.cidade != '' &&
                 data.rua != 'Local Indefinido' &&
+                data.rua != '' &&
                 data.contato;
 
             if (!informacoesCompletas && !(usuarioLogado && usuarioLogado.id === data.id)) {
