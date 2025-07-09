@@ -4,11 +4,11 @@ const mysql = require('mysql2/promise');
 
 const app = express();
 const pool = mysql.createPool({
-    host: 'switchyard.proxy.rlwy.net',
+    host: '127.0.0.1',
     user: 'root',      
-    password: 'VhkebWdHaRgvpOFTvTFLYDOnVxymrUAw',    // Altere para a senha correta
-    database: 'railway',
-    port: 26537,
+    password: '861391',    // Altere para a senha correta
+    database: 'cleanMatch',
+    port: 3307,
     waitForConnections: true,
     connectionLimit: 10,
     queueLimit: 0
@@ -40,6 +40,7 @@ app.get('/usuarios/:id', async (req, res) => {
         res.status(500).json({ error: 'Erro ao buscar Usuario' });
     }
 });
+
 
 app.post('/usuarios', async (req, res) => {
     const { nome, email, senha, tipo_conta} = req.body;
@@ -90,6 +91,67 @@ app.delete('/usuarios/:id', async (req, res) => {
         res.status(500).json({ error: 'Erro ao deletar Usuario' });
     }
 });
+
+app.get('/foto_perfil', async (req, res) => {
+    try {
+        const [rows] = await pool.query('SELECT * FROM foto_perfil');
+        res.json(rows);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).json({ error: 'Erro ao buscar foto_perfil' });
+    }
+});
+
+app.get('/foto_perfil/:id', async (req, res) => {
+    const { id } = req.params;
+    try {
+        const [rows] = await pool.query('SELECT * FROM foto_perfil WHERE id_usuario = ?', [id]);
+        if (rows.length === 0) {
+            return res.status(404).json({ error: 'Usuario não encontrado' });
+        }
+        res.json(rows[0]);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).json({ error: 'Erro ao buscar Usuario' });
+    }
+});
+
+app.post('/foto_perfil', async (req, res) => {
+    const { foto, usuarios_id} = req.body;
+    console.log(req.body);
+    try {
+        const [result] = await pool.query(
+            'INSERT INTO foto_perfil (foto, usuarios_id) VALUES (?, ?)',
+            [foto, usuarios_id]
+        );
+        const [novoUsuario] = await pool.query('SELECT * FROM foto_perfil WHERE id_usuario = ?', [result.insertId]);
+        res.status(201).json(novoUsuario[0]);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).json({ error: 'Erro ao adicionar Usuario' });
+    }
+});
+
+app.put('/foto_perfil/:id', async (req, res) => {
+    const { id } = req.params;
+    const { foto } = req.body;
+    console.log(req.params)
+    try {
+        const [result] = await pool.query(
+            'UPDATE foto_perfil SET foto = ?',
+            [foto, id]
+        );
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ error: 'Usuario não encontrado' });
+        }
+        const [usuarioAtualizado] = await pool.query('SELECT * FROM foto_perfil WHERE id_usuario= ?', [id]);
+        res.json(usuarioAtualizado[0]);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).json({ error: 'Erro ao atualizar usuario' });
+    }
+});
+
 
 app.listen(3000, () => {
     console.log('Servidor rodando na porta 3000');
