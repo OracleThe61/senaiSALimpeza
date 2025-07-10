@@ -8,6 +8,7 @@ import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import UserIcon from '../assets/icons/user-icon.svg';
 import 'react-toastify/dist/ReactToastify.css';
+import Foto_de_perfil from '../components/Foto_de_perfil';
 
 function Perfil() {
   const [isEditing, setIsEditing] = useState(false);
@@ -210,7 +211,7 @@ function Perfil() {
       <div className="perfil-dados">
         <div className="img_perfil">
           <img id="img-perfil" src={UserIcon} alt="Avatar do Perfil" />
-
+          <Foto_de_perfil />
         </div>
 
         <div className='dados_usuario'>

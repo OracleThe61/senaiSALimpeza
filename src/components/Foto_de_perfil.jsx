@@ -1,5 +1,6 @@
 import React, { useContext, useRef, useState } from 'react';
 import { GlobalContext } from '../contexts/GlobalContext';
+import axios from 'axios';
 
 
 function Foto_de_perfil() {
@@ -9,7 +10,7 @@ function Foto_de_perfil() {
     const [fotosPerfil, setfotosPerfil] = useState([])
     const { usuarioLogado, setUsuarioLogado } = useContext(GlobalContext);
 
-       const fetchfotosPerfil = async () => {
+    const fetchfotosPerfil = async () => {
         try {
             const response = await axios.get('http://localhost:3000/foto_perfil');
             setfotosPerfil(response.data);
@@ -19,7 +20,7 @@ function Foto_de_perfil() {
     };
 
     const salvarFoto = (e) => {
-        const foto = e.target.files[0]
+        const file = e.target.files[0]
         if (file) {
             setSelectedFile(file);
             setPreviewUrl(URL.createObjectURL(file));
@@ -31,40 +32,40 @@ function Foto_de_perfil() {
 
     const enviar_foto = async () => {
         try {
+           salvarFoto()
 
-            if (teste) {
-                toast.error("Preencha todos os campos corretamente");
-            } else {
+            const foto = {
+                link_foto: previewUrl,
+                usuario_id: usuarioLogado.id
+            }
 
-                const usuario = {
-                    nome: nome,
-                    email: email,
-                    senha: senha,
-                    tipo_conta: tipoConta
-                }
-                toast.success("Cadastro efetuado com sucesso");
+            if (fotosPerfil.usuarios_id != usuarioLogado.id || !fotosPerfil.id) {
 
-                const response = await axios.post('http://localhost:3000/usuarios', usuario);
+                const response = await axios.post('http://localhost:3000/foto_perfil', foto);
                 if (response.status === 201) {
 
-                    fetchUsuarios();
-                    limparForm();
-                    setTimeout(() => {
-                        navigate('/Login');
-                    }, 800);
+                    fetchfotosPerfil();
+                }
+            } else if (fotosPerfil.usuarios_id == usuarioLogado.id) {
+
+
+                const response = await axios.post(`http://localhost:3000/foto_perfil/${usuarioLogado.id}`, foto);
+                if (response.status === 201) {
+
+                    fetchfotosPerfil();
                 }
 
             }
 
         } catch (error) {
-            console.error('Erro ao adicionar usuarios:', error);
+            console.error('Erro ao Enviar foto:', error);
         }
     }
 
 
     return (
         <div>
-            <img id="img-perfil" src={UserIcon} alt="Avatar do Perfil" />
+            <img id="img-perfil" src={fotosPerfil} alt="Avatar do Perfil" />
 
             <input type="file" onChange={salvarFoto} />
         </div>
