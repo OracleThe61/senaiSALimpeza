@@ -6,7 +6,7 @@ const app = express();
 const pool = mysql.createPool({
     host: '127.0.0.1',
     user: 'root',      
-    password: '861391',    // Altere para a senha correta
+    password: '861391',    
     database: 'cleanMatch',
     port: 3307,
     waitForConnections: true,
@@ -96,59 +96,60 @@ app.get('/foto_perfil', async (req, res) => {
     try {
         const [rows] = await pool.query('SELECT * FROM foto_perfil');
         res.json(rows);
+        console.log('foi')
     } catch (err) {
         console.error(err.message);
-        res.status(500).json({ error: 'Erro ao buscar foto_perfil' });
+        res.status(500).json({ error: 'Erro ao buscar foto de perfil' });
     }
 });
 
 app.get('/foto_perfil/:id', async (req, res) => {
     const { id } = req.params;
     try {
-        const [rows] = await pool.query('SELECT * FROM foto_perfil WHERE id_usuario = ?', [id]);
+        const [rows] = await pool.query('SELECT * FROM foto_perfil WHERE id_foto_perfil = ?', [id]);
         if (rows.length === 0) {
-            return res.status(404).json({ error: 'Usuario não encontrado' });
+            return res.status(404).json({ error: 'Foto não encontrado' });
         }
         res.json(rows[0]);
     } catch (err) {
         console.error(err.message);
-        res.status(500).json({ error: 'Erro ao buscar Usuario' });
+        res.status(500).json({ error: 'Erro ao buscar foto' });
     }
 });
 
 app.post('/foto_perfil', async (req, res) => {
-    const { foto, usuarios_id} = req.body;
+    const { link_foto, usuarios_id} = req.body;
     console.log(req.body);
     try {
         const [result] = await pool.query(
             'INSERT INTO foto_perfil (foto, usuarios_id) VALUES (?, ?)',
-            [foto, usuarios_id]
+            [link_foto, usuarios_id]
         );
-        const [novoUsuario] = await pool.query('SELECT * FROM foto_perfil WHERE id_usuario = ?', [result.insertId]);
-        res.status(201).json(novoUsuario[0]);
+        const [novaFoto] = await pool.query('SELECT * FROM foto_perfil WHERE id_foto_perfil = ?', [result.insertId]);
+        res.status(201).json(novaFoto[0]);
     } catch (err) {
         console.error(err.message);
-        res.status(500).json({ error: 'Erro ao adicionar Usuario' });
+        res.status(500).json({ error: 'Erro ao adicionar foto' });
     }
 });
 
 app.put('/foto_perfil/:id', async (req, res) => {
     const { id } = req.params;
-    const { foto } = req.body;
+    const { link_foto } = req.body;
     console.log(req.params)
     try {
         const [result] = await pool.query(
-            'UPDATE foto_perfil SET foto = ?',
-            [foto, id]
+            'UPDATE foto_perfil SET foto = ? WHERE id_foto_perfil = ?',
+            [link_foto, id]
         );
         if (result.affectedRows === 0) {
-            return res.status(404).json({ error: 'Usuario não encontrado' });
+            return res.status(404).json({ error: 'Foto não encontrado' });
         }
-        const [usuarioAtualizado] = await pool.query('SELECT * FROM foto_perfil WHERE id_usuario= ?', [id]);
-        res.json(usuarioAtualizado[0]);
+        const [fotoAtualizado] = await pool.query('SELECT * FROM foto_perfil WHERE id_foto_perfil= ?', [id]);
+        res.json(fotoAtualizado[0]);
     } catch (err) {
         console.error(err.message);
-        res.status(500).json({ error: 'Erro ao atualizar usuario' });
+        res.status(500).json({ error: 'Erro ao atualizar foto' });
     }
 });
 
