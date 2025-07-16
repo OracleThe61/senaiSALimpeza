@@ -1,13 +1,15 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { GlobalContext } from '../contexts/GlobalContext';
+import './foto_perfil.css'
+import UserIcon from '../assets/icons/user-icon.svg';
 import axios from 'axios';
 
 function Foto_de_perfil() {
-    const [fotosPerfil, setfotosPerfil] = useState(null)
+    const [fotoPerfil, setfotosPerfil] = useState(null)
+    const [imagemKey, setImagemKey] = useState(Date.now());
     const { usuarioLogado } = useContext(GlobalContext);
-    const [key, setKey] = useState(0);
 
-    const defaultAvatar = "https://placehold.co/150x150/EFEFEF/333?text=Perfil";
+    const defaultAvatar = UserIcon;
 
     const fetchfotosPerfil = async () => {
         if (!usuarioLogado || !usuarioLogado.id) return;
@@ -33,13 +35,6 @@ function Foto_de_perfil() {
         fetchfotosPerfil();
     }, [usuarioLogado]);
 
-    useEffect(() => {
-        console.log("Estado atual de fotosPerfil:", fotosPerfil);
-        if (fotosPerfil) {
-            console.log("Conteúdo de fotosPerfil.foto:", fotosPerfil.foto ? fotosPerfil.foto.substring(0, 100) + '...' : 'N/A');
-        }
-        setKey(prevKey => prevKey + 1); // Incrementa a chave sempre que fotosPerfil muda
-    }, [fotosPerfil]);
 
     const enviar_foto = async (e) => {
 
@@ -57,20 +52,21 @@ function Foto_de_perfil() {
             }
             try {
 
-                if (fotosPerfil) {
-                    const response = await axios.put(`http://localhost:3000/foto_perfil/${fotosPerfil.id_foto_perfil}`, foto);
-                    if (response.status === 201) {
-                        fetchfotosPerfil();
-
+                if (fotoPerfil) {
+                    const response = await axios.put(`http://localhost:3000/foto_perfil/${fotoPerfil.id_foto_perfil}`, foto);
+                    if (response.status === 200 || response.status === 201) {
+                        await fetchfotosPerfil();
+                        setImagemKey(Date.now());
                     }
-                } else if (fotosPerfil.usuarios_id != usuarioLogado.id) {
+
+                } else if (fotoPerfil.usuarios_id != usuarioLogado.id) {
                     const response = await axios.post('http://localhost:3000/foto_perfil', foto);
-                    if (response.status === 201) {
-                        fetchfotosPerfil();
-
+                    if (response.status === 200 || response.status === 201) {
+                        await fetchfotosPerfil();
+                        setImagemKey(Date.now());
                     }
-
                 }
+
             } catch (error) {
                 console.error('Erro ao Enviar foto:', error);
             }
@@ -78,12 +74,18 @@ function Foto_de_perfil() {
         reader.readAsDataURL(file);
     };
 
-
     return (
-        <div>
-            <img id="img-perfil" src={fotosPerfil ? fotosPerfil.foto : defaultAvatar} alt="Avatar do Perfil" />
+        <div className='container_fotoPerfil'>
+            <div>
+                <img id="img-perfil" key={imagemKey} src={fotoPerfil ? fotoPerfil.foto : defaultAvatar} alt="Avatar do Perfil" />
 
-            <input type="file" accept="image/*" onChange={enviar_foto} />
+            </div>
+
+            <div className='espaço_input'>
+                <label htmlFor="inputFoto">Enviar Foto</label>
+                <input type="file" id="inputFoto" className='inputFoto' accept="image/*" onChange={enviar_foto} />
+            </div>
+
         </div>
     )
 }

@@ -96,7 +96,6 @@ app.get('/foto_perfil', async (req, res) => {
     try {
         const [rows] = await pool.query('SELECT * FROM foto_perfil');
         res.json(rows);
-        console.log('foi')
     } catch (err) {
         console.error(err.message);
         res.status(500).json({ error: 'Erro ao buscar foto de perfil' });

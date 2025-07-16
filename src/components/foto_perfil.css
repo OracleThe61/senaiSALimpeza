@@ -1,0 +1,16 @@
+.container_fotoPerfil {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.espaço_input{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.inputFoto{
+    display: none;
+}

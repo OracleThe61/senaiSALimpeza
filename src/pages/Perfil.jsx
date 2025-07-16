@@ -210,7 +210,6 @@ function Perfil() {
       <Navbar />
       <div className="perfil-dados">
         <div className="img_perfil">
-          <img id="img-perfil" src={UserIcon} alt="Avatar do Perfil" />
           <Foto_de_perfil />
         </div>
 
