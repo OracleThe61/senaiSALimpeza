@@ -5,7 +5,7 @@ import UserIcon from '../assets/icons/user-icon.svg';
 import axios from 'axios';
 
 function Foto_de_perfil() {
-    const [fotoPerfil, setfotosPerfil] = useState(null)
+    const [fotoPerfil, setfotoPerfil] = useState(null)
     const [imagemKey, setImagemKey] = useState(Date.now());
     const { usuarioLogado } = useContext(GlobalContext);
 
@@ -20,10 +20,10 @@ function Foto_de_perfil() {
             const fotoDoUsuario = todasAsFotos.find(foto => foto.usuarios_id === usuarioLogado.id);
 
             if (fotoDoUsuario) {
-                setfotosPerfil(fotoDoUsuario);
+                setfotoPerfil(fotoDoUsuario);
 
             } else {
-                setfotosPerfil(null);
+                setfotoPerfil(null);
             }
 
         } catch (error) {

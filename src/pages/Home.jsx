@@ -13,7 +13,7 @@ function Home() {
     const [usuarios, setUsuarios] = useState([]);
     const [selectedCard, setSelectedCard] = useState(null);
     const [searchTerm, setSearchTerm] = useState('');
-    const { usuarioLogado, setUsuarioLogado } = useContext(GlobalContext);
+    const {usuarioLogado, setUsuarioLogado } = useContext(GlobalContext);
     const [mostrarAviso, setMostrarAviso] = useState(false)
 
     const fetchUsuarios = async () => {
@@ -27,7 +27,6 @@ function Home() {
 
     useEffect(() => {
         fetchUsuarios();
-
     }, []);
 
     useEffect(() => {

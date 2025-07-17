@@ -13,6 +13,7 @@ function Login() {
     const [senhaLogin, setSenhaLogin] = useState('')
     const navigate = useNavigate()
 
+ 
     const fetchUsuarios = async () => {
         try {
             const response = await axios.get('http://localhost:3000/usuarios');
@@ -67,6 +68,7 @@ function Login() {
             setSenhaLogin('')
 
             setUsuarioLogado(usuarioLo)
+            salvarLogin()
 
             setTimeout(() => {
                 navigate('/');

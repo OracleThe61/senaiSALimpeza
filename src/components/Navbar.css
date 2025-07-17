@@ -2,12 +2,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    position: fixed; 
+    position: fixed;
     top: 0;
-    left: 0; 
-    width: 100%; 
-    background-color: #20c997; 
-    height: 60px; 
+    left: 0;
+    width: 100%;
+    background-color: #20c997;
+    height: 60px;
     z-index: 1;
 }
 
@@ -15,10 +15,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: white; 
-    width: 100%; 
-    max-width: 1850px; 
-    padding: 0 20px; 
+    color: white;
+    width: 100%;
+    max-width: 1850px;
+    padding: 0 20px;
 }
 
 .navbar a {
@@ -30,17 +30,17 @@
 }
 
 .navbar a:hover {
-    color: #f0f0f0; 
+    color: #f0f0f0;
 }
 
 .opcoes_perfil {
     display: flex;
     align-items: center;
-    gap: 20px; 
+    gap: 20px;
 }
 
 
-.opcoes_perfil .link-button { 
+.opcoes_perfil .link-button {
     background-color: transparent;
     border: 1px solid white;
     color: white;
@@ -57,6 +57,20 @@
     color: white;
 }
 
+.inconePerfil {
+    width: 4vh;
+    border-radius: 50%;
+    object-fit: cover;
+    background-color: #ffffff;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.container_perfil {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
 
 @media (max-width: 600px) {
     .navbar {
@@ -65,10 +79,12 @@
         gap: 200px;
         padding: 10px 20px;
     }
+
     .container_navbar {
         height: auto;
         padding: 10px 0;
     }
+
     .opcoes_perfil {
         gap: 10px;
     }

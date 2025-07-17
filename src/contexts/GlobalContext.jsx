@@ -1,11 +1,8 @@
-import { createContext, useState } from "react";
-
+import { createContext, useState, useEffect } from "react";
 export const GlobalContext = createContext()
 
 export const GlobalContextProvider = ({children}) => {
-// let usuarioLogado = 'Gill Bates'
 const [usuarioLogado, setUsuarioLogado] = useState(undefined)
-
 
     return(
         <GlobalContext.Provider value={{
