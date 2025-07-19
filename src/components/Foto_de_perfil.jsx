@@ -59,7 +59,7 @@ function Foto_de_perfil() {
                         setImagemKey(Date.now());
                     }
 
-                } else if (fotoPerfil.usuarios_id != usuarioLogado.id) {
+                } else {
                     const response = await axios.post('http://localhost:3000/foto_perfil', foto);
                     if (response.status === 200 || response.status === 201) {
                         await fetchfotosPerfil();

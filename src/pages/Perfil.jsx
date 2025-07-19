@@ -6,7 +6,6 @@ import { formatPhoneNumber, formatCepNumber, validarEmail } from '../components/
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
-import UserIcon from '../assets/icons/user-icon.svg';
 import 'react-toastify/dist/ReactToastify.css';
 import Foto_de_perfil from '../components/Foto_de_perfil';
 

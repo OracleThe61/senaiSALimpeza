@@ -6,6 +6,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { formatPhoneNumber, formatCepNumber, formatTime } from '../components/Formarter';
 import { GlobalContext } from '../contexts/GlobalContext';
 import Aviso from '../components/Aviso';
+import UserIcon from '../assets/icons/user-icon.svg';
 
 
 function Home() {
@@ -13,8 +14,10 @@ function Home() {
     const [usuarios, setUsuarios] = useState([]);
     const [selectedCard, setSelectedCard] = useState(null);
     const [searchTerm, setSearchTerm] = useState('');
-    const {usuarioLogado, setUsuarioLogado } = useContext(GlobalContext);
-    const [mostrarAviso, setMostrarAviso] = useState(false)
+    const { usuarioLogado, setUsuarioLogado } = useContext(GlobalContext);
+    const [mostrarAviso, setMostrarAviso] = useState(false);
+    const [fotoPerfil, setfotoPerfil] = useState({});
+    const defaultAvatar = UserIcon;
 
     const fetchUsuarios = async () => {
         try {
@@ -29,6 +32,29 @@ function Home() {
         fetchUsuarios();
     }, []);
 
+
+    const fetchfotosPerfil = async () => {
+        try {
+            const response = await axios.get('http://localhost:3000/foto_perfil');
+            const todasAsFotos = response.data;
+
+
+            const fotosMap = {}
+            todasAsFotos.forEach(foto => {
+                fotosMap[foto.usuarios_id] = foto.foto
+
+            })
+            setfotoPerfil(fotosMap);
+
+        } catch (error) {
+            console.error('Erro ao buscar Foto:', error);
+        }
+    };
+
+    useEffect(() => {
+        fetchfotosPerfil();
+    }, []);
+
     useEffect(() => {
         if (usuarioLogado && usuarioLogado.tipo_conta === 'Prestador/a de Serviço') {
             const { cargaHoraria_inicio, cargaHoraria_fim, valor_min, valor_max, cep, estado, cidade, rua, contato } = usuarioLogado;
@@ -39,11 +65,8 @@ function Home() {
                 !valor_min ||
                 !valor_max ||
                 !cep ||
-                estado == 'Local Indefinido' || 
                 estado == '' ||
-                cidade == 'Local Indefinido' || 
-                cidade =='' ||
-                rua == 'Local Indefinido' || 
+                cidade == '' ||
                 rua == '' ||
                 !contato;
 
@@ -53,7 +76,8 @@ function Home() {
         }
     }, [usuarioLogado]);
 
-    const Card = ({ data, onClick, isSelected }) => {
+
+    const Card = ({ data, onClick, isSelected, fotoUrl }) => {
         if (data.tipo_conta === 'Prestador/a de Serviço') {
             const informacoesCompletas =
                 data.cargaHoraria_inicio &&
@@ -61,11 +85,8 @@ function Home() {
                 data.valor_min &&
                 data.valor_max &&
                 data.cep &&
-                data.estado != 'Local Indefinido' &&
                 data.estado != '' &&
-                data.cidade != 'Local Indefinido' &&
                 data.cidade != '' &&
-                data.rua != 'Local Indefinido' &&
                 data.rua != '' &&
                 data.contato;
 
@@ -73,17 +94,29 @@ function Home() {
                 return null;
             }
 
+
             return (
                 <div className={`card ${isSelected ? 'selected' : ''}`} onClick={onClick}>
-                    <h2>{data.nome}</h2>
-                    <p><strong>Email:</strong> {data.email}</p>
-                    <p><strong>Localização:</strong> {data.cidade} | {data.estado}</p>
-                    <p><strong>Horario:</strong> {formatTime(data.cargaHoraria_inicio)} - {formatTime(data.cargaHoraria_fim)}</p>
-                    <p className="price-button"><strong>R$ {data.valor_min} - R$ {data.valor_max}</strong></p>
+                    <div className='elementos-card'>
+
+                        <img className="fotoUserHome" src={fotoUrl} alt="Avatar do Perfil" />
+
+                        <div className='basic_info'>
+                            <h2>{data.nome}</h2>
+                            <p><strong>Email:</strong> {data.email}</p>
+                            <p><strong>Localização:</strong> {data.cidade} | {data.estado}</p>
+                            <p><strong>Horario:</strong> {formatTime(data.cargaHoraria_inicio)} - {formatTime(data.cargaHoraria_fim)}</p>
+
+                            <div className='contianer-valorServico'>
+                                <p className="price-button"><strong>R$ {data.valor_min} - R$ {data.valor_max}</strong></p>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
             );
         }
-        // Retorna null para outros tipos de conta que você não quer exibir
+
         return null;
     };
 
@@ -124,32 +157,50 @@ function Home() {
                 <div className="main-content">
 
                     <div className="card-list">
-                        {filteredCards.map((user, index) => (
-                            <Card
+                        {filteredCards.map((user, index) => {
+                            const fotoUsuario = fotoPerfil[user.id_usuario] || defaultAvatar;
+
+                            return (<Card
                                 key={user.id}
                                 data={user}
                                 onClick={() => handleCardClick(index)}
                                 isSelected={selectedCard === user}
-                            />
-                        ))}
+                                fotoUrl={fotoUsuario}
+                            />)
+                        })}
                     </div>
 
-                    {selectedCard && (
-                        <div className='detalhe_usuarios'>
-                            <div className="card-details">
-                                <h2>{selectedCard.nome}</h2>
-                                <p><strong>Email:</strong> {selectedCard.email}</p>
-                                <p><strong>Contato:</strong> {formatPhoneNumber(selectedCard.contato)}</p>
-                                <p><strong>CEP:</strong> {formatCepNumber(selectedCard.cep)}</p>
-                                <p><strong>Localização:</strong> {selectedCard.cidade}, {selectedCard.estado}</p>
-                                <p><strong>Rua:</strong> {selectedCard.rua}</p>
-                                <p><strong>Horário:</strong>{formatTime(selectedCard.cargaHoraria_inicio)} - {formatTime(selectedCard.cargaHoraria_fim)}</p>
-                                <p><strong>Faixa de Preço:</strong> R$ {selectedCard.valor_min} - R$ {selectedCard.valor_max}</p>
-                                <p><strong>Descrição:</strong> {selectedCard.descricao}</p>
-                            </div>
+                    {selectedCard && (() => {
+                        const fotoUrl = fotoPerfil[selectedCard.id_usuario] || defaultAvatar;
 
-                        </div>
-                    )}
+                        return (
+
+                            <div className='detalhe_usuarios'>
+                                <div className="card-details">
+                                    <div className='detalhes-topo'>
+                                        <img className="fotoUserdetalhes" src={fotoUrl} alt="Avatar do Perfil" />
+                                        <div className='infos-topo'>
+                                            <p className='nome-detalhes'><strong>{selectedCard.nome}</strong></p>
+                                            <p><strong>Email:</strong> {selectedCard.email}</p>
+                                            <p><strong>Contato:</strong> {formatPhoneNumber(selectedCard.contato)}</p>
+
+                                        </div>
+                                    </div>
+
+                                    <div className='detalhes-bottom'>
+
+                                        <p><strong>CEP:</strong> {formatCepNumber(selectedCard.cep)}</p>
+                                        <p><strong>Localização:</strong> {selectedCard.cidade}, {selectedCard.estado}</p>
+                                        <p><strong>Rua:</strong> {selectedCard.rua}</p>
+                                        <p><strong>Horário:</strong>{formatTime(selectedCard.cargaHoraria_inicio)} - {formatTime(selectedCard.cargaHoraria_fim)}</p>
+                                        <p><strong>Faixa de Preço:</strong> R$ {selectedCard.valor_min} - R$ {selectedCard.valor_max}</p>
+                                        <p><strong>Descrição:</strong> {selectedCard.descricao}</p>
+                                    </div>
+                                </div>
+
+                            </div>
+                        )
+                    })()}
 
                 </div>
 

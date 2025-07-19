@@ -63,12 +63,8 @@ function Login() {
             }
 
             toast.success("Login efetuado com sucesso");
-
-            setEmailLogin('')
-            setSenhaLogin('')
-
+            
             setUsuarioLogado(usuarioLo)
-            salvarLogin()
 
             setTimeout(() => {
                 navigate('/');
