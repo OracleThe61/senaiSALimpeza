@@ -17,7 +17,10 @@ function Home() {
     const { usuarioLogado, setUsuarioLogado } = useContext(GlobalContext);
     const [mostrarAviso, setMostrarAviso] = useState(false);
     const [fotoPerfil, setfotoPerfil] = useState({});
+    const [paginaAtual, setPaginaAtual] = useState(1);
+    const [itensPorPagina, setItensPorPagina] = useState(10);
     const defaultAvatar = UserIcon;
+
 
     const fetchUsuarios = async () => {
         try {
@@ -77,61 +80,72 @@ function Home() {
     }, [usuarioLogado]);
 
 
+    useEffect(() => {
+        setSelectedCard(null);
+    }, [searchTerm, paginaAtual]);
+
+    useEffect(() => {
+        setPaginaAtual(1);
+    }, [searchTerm, itensPorPagina]);
+
+
     const Card = ({ data, onClick, isSelected, fotoUrl }) => {
-        if (data.tipo_conta === 'Prestador/a de Serviço') {
-            const informacoesCompletas =
-                data.cargaHoraria_inicio &&
-                data.cargaHoraria_fim &&
-                data.valor_min &&
-                data.valor_max &&
-                data.cep &&
-                data.estado != '' &&
-                data.cidade != '' &&
-                data.rua != '' &&
-                data.contato;
-
-            if (!informacoesCompletas && !(usuarioLogado && usuarioLogado.id === data.id)) {
-                return null;
-            }
-
-
-            return (
-                <div className={`card ${isSelected ? 'selected' : ''}`} onClick={onClick}>
-                    <div className='elementos-card'>
-
-                        <img className="fotoUserHome" src={fotoUrl} alt="Avatar do Perfil" />
-
-                        <div className='basic_info'>
-                            <h2>{data.nome}</h2>
-                            <p><strong>Email:</strong> {data.email}</p>
-                            <p><strong>Localização:</strong> {data.cidade} | {data.estado}</p>
-                            <p><strong>Horario:</strong> {formatTime(data.cargaHoraria_inicio)} - {formatTime(data.cargaHoraria_fim)}</p>
-
-                            <div className='contianer-valorServico'>
-                                <p className="price-button"><strong>R$ {data.valor_min} - R$ {data.valor_max}</strong></p>
-                            </div>
-
+        return (
+            <div className={`card ${isSelected ? 'selected' : ''}`} onClick={onClick}>
+                <div className='elementos-card'>
+                    <img className="fotoUserHome" src={fotoUrl} alt="Avatar do Perfil" />
+                    <div className='basic_info'>
+                        <h2>{data.nome}</h2>
+                        <p><strong>Email:</strong> {data.email}</p>
+                        <p><strong>Localização:</strong> {data.cidade} | {data.estado}</p>
+                        <p><strong>Horário:</strong> {formatTime(data.cargaHoraria_inicio)} - {formatTime(data.cargaHoraria_fim)}</p>
+                        <div className='contianer-valorServico'>
+                            <p className="price-button"><strong>R$ {data.valor_min} - R$ {data.valor_max}</strong></p>
                         </div>
                     </div>
                 </div>
-            );
+            </div>
+        );
+    };
+
+    const usuariosVisiveis = usuarios.filter(user => {
+        if (user.tipo_conta !== 'Prestador/a de Serviço') return false;
+
+        const informacoesCompletas =
+            user.cargaHoraria_inicio &&
+            user.cargaHoraria_fim &&
+            user.valor_min &&
+            user.valor_max &&
+            user.cep &&
+            user.estado &&
+            user.cidade &&
+            user.rua &&
+            user.contato;
+        if (!informacoesCompletas && !(usuarioLogado && usuarioLogado.id === user.id)) {
+            return false;
         }
 
-        return null;
+        const termo = searchTerm.toLowerCase();
+        if (termo === '') return true;
+
+        return (
+            user.nome?.toLowerCase().includes(termo) ||
+            user.cidade?.toLowerCase().includes(termo) ||
+            user.estado?.toLowerCase().includes(termo) ||
+            user.rua?.toLowerCase().includes(termo)
+        );
+    });
+
+    const handleCardClick = (user) => {
+        setSelectedCard(user);
     };
 
 
+    const totalDePaginas = Math.ceil(usuariosVisiveis.length / itensPorPagina);
+    const ultimoItemIndex = paginaAtual * itensPorPagina;
+    const primeiroItemIndex = ultimoItemIndex - itensPorPagina;
+    const usuariosDaPagina = usuariosVisiveis.slice(primeiroItemIndex, ultimoItemIndex);
 
-    const handleCardClick = (index) => {
-        setSelectedCard(filteredCards[index]);
-    };
-
-    const filteredCards = usuarios.filter((user) =>
-        user.nome?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        user.cidade?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        user.estado?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        user.rua?.toLowerCase().includes(searchTerm.toLowerCase())
-    );
 
     return (
         <div className="container_home">
@@ -144,26 +158,41 @@ function Home() {
             )}
 
             <div className='corpo_home'>
-                <div className='input_pesquisa'>
-                    <input
-                        type="text"
-                        placeholder="Buscar por nome, cidade ou estado"
-                        value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
-                        className="search-bar"
-                    />
+                <div className='conteudo_topo'>
+                    <div className='input_pesquisa'>
+                        <input
+                            type="text"
+                            placeholder="Buscar por nome, cidade ou estado"
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                            className="search-bar"
+                        />
+                    </div>
+
+                    <div className='qnt_itensPaginacao'>
+                        <label className='msgIdicativa'>Exibir por:</label>
+
+                        {[10, 15, 20, 25, 30].map(qnt => (
+                            <button
+                                key={qnt}
+                                className={`bnt_qntItensPagina ${itensPorPagina === qnt ? 'active' : ''}`}
+                                onClick={() => setItensPorPagina(qnt)}
+                            >
+                                {qnt}
+                            </button>
+                        ))}
+                    </div>
                 </div>
 
                 <div className="main-content">
 
                     <div className="card-list">
-                        {filteredCards.map((user, index) => {
+                        {usuariosDaPagina.map((user) => {
                             const fotoUsuario = fotoPerfil[user.id_usuario] || defaultAvatar;
-
                             return (<Card
                                 key={user.id}
                                 data={user}
-                                onClick={() => handleCardClick(index)}
+                                onClick={() => handleCardClick(user)}
                                 isSelected={selectedCard === user}
                                 fotoUrl={fotoUsuario}
                             />)
@@ -198,10 +227,38 @@ function Home() {
                                     </div>
                                 </div>
 
+
                             </div>
+
                         )
                     })()}
 
+                </div>
+
+                <div className='conteudo_bottom'>
+                    <div className="controle_paginacao">
+                        <button
+                            onClick={() => setPaginaAtual(paginaAtual - 1)}
+                            disabled={paginaAtual === 1}
+                        >
+                            Anterior
+                        </button>
+                        {Array.from({ length: totalDePaginas }, (_, index) => (
+                            <button
+                                key={index + 1}
+                                onClick={() => setPaginaAtual(index + 1)}
+                                className={paginaAtual === index + 1 ? 'active' : ''}
+                            >
+                                {index + 1}
+                            </button>
+                        ))}
+                        <button
+                            onClick={() => setPaginaAtual(paginaAtual + 1)}
+                            disabled={paginaAtual === totalDePaginas}
+                        >
+                            Próxima
+                        </button>
+                    </div>
                 </div>
 
             </div>
