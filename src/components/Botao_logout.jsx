@@ -13,7 +13,7 @@ function bnt_Logout() {
     const deslogar = () => {
         if (usuarioLogado) {
             console.log(usuarioLogado)
-            setUsuarioLogado(undefined)
+            setUsuarioLogado(null)
             navigate("/")
             toast.success("Voce saiu de sua conta");
         } else {
