@@ -5,7 +5,7 @@ import Navbar from '../components/Navbar';
 import { formatPhoneNumber, formatCepNumber, validarEmail } from '../components/Formarter';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Foto_de_perfil from '../components/Foto_de_perfil';
 
@@ -34,12 +34,13 @@ function Perfil() {
   }, [usuarioLogado]);
 
 
-  useEffect(() => {
-    if (!usuarioLogado) {
-      toast.warning('Você precisa estar logado para acessar esta página.');
-      navigate('/');
-    }
-  });
+  // ativar caso houver mudança de desing para acesso ao perfil
+  // useEffect(() => {
+  //   if (!usuarioLogado) {
+  //     toast.warning('Você precisa estar logado para acessar esta página.');
+  //     navigate('/');
+  //   }
+  // }, [navigate]);
 
   const fetchAddressByCep = useCallback(async (cep) => {
 
@@ -173,12 +174,10 @@ function Perfil() {
     try {
       await axios.delete(`http://localhost:3000/usuarios/${usuarioLogado.id}`);
 
-      toast.success('Conta excluída com sucesso!');
       setUsuarioLogado(null);
       setShowDeleteModal(false);
-      setTimeout(() => {
-        navigate('/');
-      }, 1000);
+      navigate('/');
+      return toast.success('Conta excluída com sucesso!');
     } catch (error) {
       toast.error('Erro ao excluir conta. Tente novamente.');
       console.error('Erro ao excluir conta:', error);
@@ -453,17 +452,7 @@ function Perfil() {
 
       </div>
 
-      <ToastContainer
-        position="top-right"
-        autoClose={2000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss={false}
-        draggable
-        pauseOnHover={false}
-      />
+
     </div>
   );
 }

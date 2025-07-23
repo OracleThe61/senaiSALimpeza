@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react'
-import { ToastContainer, toast } from 'react-toastify';
+import {toast } from 'react-toastify';
 import { GlobalContext } from "../contexts/GlobalContext"
 import Navbar from "../components/Navbar"
 import axios from 'axios';
@@ -13,7 +13,7 @@ function Login() {
     const [senhaLogin, setSenhaLogin] = useState('')
     const navigate = useNavigate()
 
- 
+
     const fetchUsuarios = async () => {
         try {
             const response = await axios.get('http://localhost:3000/usuarios');
@@ -63,12 +63,11 @@ function Login() {
             }
 
             toast.success("Login efetuado com sucesso");
-            
+
             setUsuarioLogado(usuarioLo)
 
-            setTimeout(() => {
-                navigate('/');
-            }, 1000);
+            navigate('/');
+
         }
 
     }
@@ -106,18 +105,6 @@ function Login() {
             </div>
 
 
-            <ToastContainer
-                position="top-right"
-                autoClose={2000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss={false}
-                draggable
-                pauseOnHover={false}
-
-            />
         </div>
     )
 }
