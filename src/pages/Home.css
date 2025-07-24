@@ -101,6 +101,7 @@
 .fotoUserHome {
     width: 150px;
     border-radius: 5px 0 0 5px;
+    object-fit: cover;
 }
 
 .card:hover {

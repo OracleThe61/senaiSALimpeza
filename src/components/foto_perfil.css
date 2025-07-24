@@ -5,12 +5,29 @@
     align-items: center;
 }
 
-.espaço_input{
+.espaço_input {
     display: flex;
     flex-direction: column;
     align-items: center;
+
 }
 
-.inputFoto{
+.espaço_input label {
+    font-weight: bolder;
+    font-size: 18px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.espaço_input label:hover {
+    transform: scale(1.1);
+    transition: 0.3s;
+}
+
+.inputFoto {
     display: none;
+}
+
+.img-perfil {
+    object-fit: cover;
 }

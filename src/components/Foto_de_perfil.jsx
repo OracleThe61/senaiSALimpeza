@@ -77,7 +77,7 @@ function Foto_de_perfil() {
     return (
         <div className='container_fotoPerfil'>
             <div>
-                <img id="img-perfil" key={imagemKey} src={fotoPerfil ? fotoPerfil.foto : defaultAvatar} alt="Avatar do Perfil" />
+                <img id="img-perfil"  key={imagemKey} src={fotoPerfil ? fotoPerfil.foto : defaultAvatar} alt="Avatar do Perfil" />
 
             </div>
 

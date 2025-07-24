@@ -4,6 +4,7 @@ import Botao_logout from './Botao_logout.jsx'
 import Botao_login from "./Botao_login.jsx"
 import Botao_cadastro from "./Botao_cadastro.jsx"
 import { useContext, useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom';
 import { GlobalContext } from "../contexts/GlobalContext"
 import axios from 'axios';
 import UserIcon from '../assets/icons/user-icon.svg';
@@ -11,6 +12,7 @@ import UserIcon from '../assets/icons/user-icon.svg';
 function Navbar() {
   const { usuarioLogado, setUsuarioLogado } = useContext(GlobalContext)
   const [fotoPerfil, setfotoPerfil] = useState(null)
+   const navigate = useNavigate()
 
   const defaultAvatar = UserIcon;
 
@@ -59,7 +61,7 @@ function Navbar() {
             )}
           {usuarioLogado ? (
             <div className="container_perfil">
-              <img className="inconePerfil" src={fotoPerfil ? fotoPerfil.foto : defaultAvatar} alt="Avatar do Perfil" />
+              <img className="inconePerfil"  src={fotoPerfil ? fotoPerfil.foto : defaultAvatar} alt="Avatar do Perfil" />
               <Link to="/Perfil">Perfil</Link>
             </div>
           ) : (
